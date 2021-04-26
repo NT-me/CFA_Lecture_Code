@@ -3,23 +3,23 @@ package Tools;
 import java.util.ArrayList;
 
 public class Node {
-    private Token token;
+    private SyntaxiqueToken token;
     private ArrayList<Node>children;
 
     // Creating node without children
-    public Node(Token root){
+    public Node(SyntaxiqueToken root){
         this.token = root;
         this.children = new ArrayList<Node>();
     }
 
     //Creating node with children
-    public Node(Token root, ArrayList<Node> children){
+    public Node(SyntaxiqueToken root, ArrayList<Node> children){
         this.token = root;
         this.children = children;
     }
 
     // Utility function add child none
-    public Node newChild(Token childToken)
+    public Node newChild(SyntaxiqueToken childToken)
     {
         Node temp = new Node(childToken);
         this.children.add(temp);

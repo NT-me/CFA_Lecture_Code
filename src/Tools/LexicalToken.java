@@ -21,7 +21,7 @@ enum lexicalType {
     list
 }
 
-public class Token {
+public class LexicalToken {
     private lexicalType type;
     private String value;
 
@@ -41,7 +41,7 @@ public class Token {
         this.value = value;
     }
 
-    public Token(lexicalType type, String value) {
+    public LexicalToken(lexicalType type, String value) {
         this.type = type;
         this.value = value;
     }
