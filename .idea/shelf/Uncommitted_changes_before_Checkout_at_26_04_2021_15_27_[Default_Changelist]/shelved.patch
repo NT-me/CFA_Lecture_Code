@@ -1,0 +1,60 @@
+Index: src/SyntaxicalParser/SynParser.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package SyntaxicalParser;\r\n\r\nimport Tools.LexicalToken;\r\nimport Tools.Node;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class SynParser {\r\n    //ArrayList<Node> token = new ArrayList<Node>();\r\n    public ArrayList<Node> parsing(ArrayList<LexicalToken> token){\r\n        ArrayList<Node> AST = new ArrayList<Node>();\r\n\r\n        return AST;\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/SyntaxicalParser/SynParser.java b/src/SyntaxicalParser/SynParser.java
+--- a/src/SyntaxicalParser/SynParser.java	(revision 51faa6c57f079d9886c4169ecd6d0d74787f9d9a)
++++ b/src/SyntaxicalParser/SynParser.java	(date 1619443596180)
+@@ -1,16 +1,13 @@
+ package SyntaxicalParser;
+ 
+-import Tools.LexicalToken;
+ import Tools.Node;
+ 
+-import java.util.ArrayList;
+-
+ public class SynParser {
+-    //ArrayList<Node> token = new ArrayList<Node>();
+-    public ArrayList<Node> parsing(ArrayList<LexicalToken> token){
+-        ArrayList<Node> AST = new ArrayList<Node>();
++    ArrayList<Node> token = new ArrayList<Node>();
++    public ArrayList<any> parsing(ArrayList<any> token){
++        ArrayList<any> AST = new ArrayList<any>();
+ 
+         return AST;
+     }
+ }
+-
++}
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"ba595f5e-d671-4279-bae8-ffd078b15d60\" name=\"Default Changelist\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java\" afterDir=\"false\" />\r\n\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\r\n    <property name=\"node.js.detected.package.eslint\" value=\"true\" />\r\n    <property name=\"node.js.detected.package.tslint\" value=\"true\" />\r\n    <property name=\"node.js.path.for.package.eslint\" value=\"project\" />\r\n    <property name=\"node.js.path.for.package.tslint\" value=\"project\" />\r\n    <property name=\"node.js.selected.package.eslint\" value=\"(autodetect)\" />\r\n    <property name=\"node.js.selected.package.tslint\" value=\"(autodetect)\" />\r\n    <property name=\"project.structure.last.edited\" value=\"SDKs\" />\r\n    <property name=\"project.structure.proportion\" value=\"0.0\" />\r\n    <property name=\"project.structure.side.proportion\" value=\"0.0\" />\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Data structures --&gt; :+1:&#10;&#10;Node, Token\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Data structures --&gt; :+1:&#10;&#10;Node, Token\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 51faa6c57f079d9886c4169ecd6d0d74787f9d9a)
++++ b/.idea/workspace.xml	(date 1619442130677)
+@@ -2,9 +2,8 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="">
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java" afterDir="false" />
+-
++      <change beforePath="$PROJECT_DIR$/src/Tools/SyntaxiqueToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/SyntaxiqueToken.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -27,7 +26,6 @@
+     <property name="project.structure.side.proportion" value="0.0" />
+   </component>
+   <component name="TaskManager">
+-
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
