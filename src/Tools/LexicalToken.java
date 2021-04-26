@@ -1,29 +1,10 @@
 package Tools;
 
-enum lexicalType {
-    word, // blabla, int
-    number, // 1
-    assignation,
-    quote,
-    doubleQuote,
-    endInstruction, //(;)
-    virgule,
-    openParenthese,
-    closeParenthese,
-    superieur,
-    inferieur,
-    superieurOuEgal,
-    inferieurOuEgal,
-    different,
-    equal,
-    point,
-    bool,
-    list
-}
-
 public class LexicalToken {
     private lexicalType type;
     private String value;
+
+
 
     public lexicalType getType() {
         return type;
@@ -44,5 +25,10 @@ public class LexicalToken {
     public LexicalToken(lexicalType type, String value) {
         this.type = type;
         this.value = value;
+    }
+
+    public LexicalToken() {
+        this.type = null;
+        this.value = "";
     }
 }

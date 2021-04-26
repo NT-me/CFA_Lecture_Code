@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="" />
+    <list default="true" id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="Enum + Type update&#10;parsing declaration &amp; affectation variable">
+      <change afterPath="$PROJECT_DIR$/src/Tools/ContenuType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tools/SyntaxiqueType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tools/lexicalType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/ContenuToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/ContenuToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/LexicalToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/LexicalToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/SyntaxiqueToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/SyntaxiqueToken.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
-
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PropertiesComponent">
-
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -63,5 +78,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Enum + Type update&#10;parsing declaration &amp; affectation variable" />
+    <option name="LAST_COMMIT_MESSAGE" value="Enum + Type update&#10;parsing declaration &amp; affectation variable" />
   </component>
 </project>

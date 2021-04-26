@@ -1,13 +1,5 @@
 package Tools;
 
-enum ContenuType{
-    typeInt,
-    typeFloat,
-    typeString,
-    typeBool,
-    typeList
-}
-
 public class ContenuToken {
     private ContenuType type;
     private String value;

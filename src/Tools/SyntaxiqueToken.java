@@ -1,11 +1,5 @@
 package Tools;
 
-enum SyntaxiqueType{
-    declarationVariable,
-    affectationVariable,
-    function
-}
-
 public class SyntaxiqueToken {
     private SyntaxiqueType type;
     private String name;
