@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CFA_Lecture_Code.iml" filepath="$PROJECT_DIR$/CFA_Lecture_Code.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/LexicalParser/LexicalParser.iml" filepath="$PROJECT_DIR$/src/LexicalParser/LexicalParser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/Scoring/Scoring.iml" filepath="$PROJECT_DIR$/src/Scoring/Scoring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/SemanticalParser/SemanticalParser.iml" filepath="$PROJECT_DIR$/src/SemanticalParser/SemanticalParser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/SyntaxicalParser/SyntaxicalParser.iml" filepath="$PROJECT_DIR$/src/SyntaxicalParser/SyntaxicalParser.iml" />
+    </modules>
+  </component>
+</project>
