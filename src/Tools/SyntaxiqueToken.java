@@ -1,18 +1,20 @@
 package Tools;
 
 enum SyntaxiqueType{
-
+    declarationVariable,
+    affectationVariable,
+    function
 }
 
 public class SyntaxiqueToken {
     private SyntaxiqueType type;
     private String name;
-    private LexicalToken value;
+    private ContenuToken contenu;
 
-    public SyntaxiqueToken(SyntaxiqueType type, String name, LexicalToken value) {
+    public SyntaxiqueToken(SyntaxiqueType type, String name, ContenuToken contenu) {
         this.type = type;
         this.name = name;
-        this.value = value;
+        this.contenu = contenu;
     }
 
     public SyntaxiqueType getType() {
@@ -31,11 +33,11 @@ public class SyntaxiqueToken {
         this.name = name;
     }
 
-    public LexicalToken getValue() {
-        return value;
+    public ContenuToken getValue() {
+        return contenu;
     }
 
-    public void setValue(LexicalToken value) {
-        this.value = value;
+    public void setValue(ContenuToken contenu) {
+        this.contenu = contenu;
     }
 }
