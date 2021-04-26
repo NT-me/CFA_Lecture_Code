@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e66ebc11-1369-42f2-bcf7-46e17b8db77e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Tools/Node.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tools/Token.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tools/SyntaxiqueToken.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Scoring/Scorer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Scoring/Scorer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/LexicalToken.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,5 +82,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Data structures --&gt; :+1:&#10;&#10;Node, Token" />
+    <option name="LAST_COMMIT_MESSAGE" value="Data structures --&gt; :+1:&#10;&#10;Node, Token" />
   </component>
 </project>
