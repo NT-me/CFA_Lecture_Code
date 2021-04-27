@@ -8,8 +8,8 @@ import static Tools.SyntaxiqueType.*;
 import static Tools.lexicalType.*;
 
 public class SynParser {
-    public static ArrayList<Node> parsing(ArrayList<LexicalToken> token){
-        ArrayList<Node> AST = new ArrayList<>();
+    public static Node parsing(ArrayList<LexicalToken> token){
+        Node AST = new Node();
         LexicalToken tokenVerification;
         ContenuToken contenuToken = new ContenuToken();
         //exemple: int a;
@@ -33,14 +33,11 @@ public class SynParser {
                     if(variable.equals(pileContenuValue.get(j+1).getType())){
                         nodeToken.setType(declarationVariable);
                         nodeToken.setName(pileContenuValue.get(j+1).getValue());
-                        nodeToSetup = new Node(nodeToken);
-                        AST.add(nodeToSetup);
+                        AST.newChild(nodeToken);
                     } else if(function.equals(pileContenuValue.get(j+1).getType())){
                         nodeToken.setType(declarationFunction);
                         nodeToken.setName(pileContenuValue.get(j+1).getValue());
-                        nodeToSetup = new Node(nodeToken);
-
-                        AST.add(nodeToSetup);
+                        AST.newChild(nodeToken);
                     }  /*else{
                         //throw ();
                     }*/
@@ -60,7 +57,7 @@ public class SynParser {
                 }*/
 
         }
-        AST.get(0).printNode(0);
+        AST.printNode(0);
         return AST;
     }
 }

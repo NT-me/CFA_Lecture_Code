@@ -5,11 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tools/ContenuToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/ContenuToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tools/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tools/SyntaxiqueToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/SyntaxiqueToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tools/SyntaxiqueType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/SyntaxiqueType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tools/lexicalType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/lexicalType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +83,7 @@
       <option name="presentableId" value="Default" />
       <updated>1619432334360</updated>
       <workItem from="1619436917187" duration="423000" />
-      <workItem from="1619508558448" duration="5757000" />
+      <workItem from="1619508558448" duration="9601000" />
     </task>
     <task id="LOCAL-00001" summary="Enum + Type update&#10;parsing declaration &amp; affectation variable">
       <created>1619471929973</created>
@@ -97,7 +92,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619471929973</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Lecture d'une seule instruction simple fait !">
+      <created>1619514515856</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1619514515856</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
