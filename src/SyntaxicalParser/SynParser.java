@@ -21,9 +21,11 @@ public class SynParser {
        /* ContenuToken contenuToken = new ContenuToken();
         //exemple: int a;
         SyntaxiqueToken nodeToken = new SyntaxiqueToken(null, "", null);*/
-        ArrayList<LexicalToken> pileContenuValue = new ArrayList<>();
+        //ArrayList<LexicalToken> pileContenuValue = new ArrayList<>();
         LexicalToken lexicalValue = new LexicalToken();
         Node nodeToSetup;
+        int scope = 0;
+        SyntaxicStack pileContenuValue = new SyntaxicStack(0);
 
 
         for(int i = 0;i< token.size();i++){
@@ -31,41 +33,42 @@ public class SynParser {
             tokenVerification = token.get(i);
             //Tant que l'on ne rencontre pas de ";" on ajoute les token dans la pile
             if(!EoI.equals(tokenVerification.getType())){
-                pileContenuValue.add(tokenVerification);
+                pileContenuValue.pushReadStack(scope, tokenVerification);
                 continue;
             }
 
             //Si l'instruction commence par un type, on declare une variable ou fonction, sinon erreur ?
-            for (int j = 0; j<pileContenuValue.size();j++){
-                if(pileContenuValue.get(j).getType() == BasicType){
+            for (int j = 0; j<pileContenuValue.readStackSize(scope);j++){
+                if(pileContenuValue.popReadStack(scope, j).getType() == BasicType){
                     //declarer une variable
-                    if(Var.equals(pileContenuValue.get(j+1).getType())){
+                    if(Var.equals(pileContenuValue.popReadStack(scope,j+1).getType())){
                         DeclarationVariableNode nodeDec = new DeclarationVariableNode();
-                        nodeDec.setName(pileContenuValue.get(j+1).getValue());
-                        nodeDec.setType(pileContenuValue.get(j).getValue());
+                        nodeDec.setName(pileContenuValue.popReadStack(scope,j+1).getValue());
+                        nodeDec.setType(pileContenuValue.popReadStack(scope,j).getValue());
                         AST.addChild((Node) nodeDec);
+                        pileContenuValue.newVarDeclToken(scope, pileContenuValue.popReadStack(scope,j+1).getValue());
                     }
 
-                    else if(Function.equals(pileContenuValue.get(j+1).getType())
-                            && Lp.equals(pileContenuValue.get(j+2))){
+/*                    else if(Function.equals(pileContenuValue.popReadStack(scope,j+1).getType())
+                            && Lp.equals(pileContenuValue.popReadStack(scope,j+2))){
 
                         DeclarationFunctionNode nodeFunc = new DeclarationFunctionNode();
-                        nodeFunc.setName(pileContenuValue.get(j+1).getValue());
-                        nodeFunc.setType(pileContenuValue.get(j).getValue());
+                        nodeFunc.setName(pileContenuValue.popReadStack(scope,j+1).getValue());
+                        nodeFunc.setType(pileContenuValue.popReadStack(scope,j).getValue());
                         int k = 0;
-                        for(k = j; k < pileContenuValue.size(); k++){
-                            if (")".equals(pileContenuValue.get(k))){
+                        for(k = j; k < pileContenuValue.readStackSize(scope); k++){
+                            if (")".equals(pileContenuValue.popReadStack(scope,k))){
                                 break;
                             }
-                            nodeFunc.addParams(pileContenuValue.get(k).getValue());
+                            nodeFunc.addParams(pileContenuValue.popReadStack(scope,k).getValue());
                         }
-                        if ("{".equals(pileContenuValue.get(k))) {
-                            for (int l = k;l<pileContenuValue.size();l++){
+                        if ("{".equals(pileContenuValue.popReadStack(scope,k))) {
+                            for (int l = k;l<pileContenuValue.readStackSize(scope);l++){
 
                             }
                         }
                         AST.addChild((Node) nodeFunc);
-                    }
+                    }*/
                     else{
                         // Try cath sans doute en trop mais osef un peu
                         String msg = " Strange thing after an type";
@@ -78,7 +81,7 @@ public class SynParser {
                     }
                 }
             }
-            pileContenuValue.clear();
+            pileContenuValue.clearReadStack(scope);
 
 
                 //affecter une variable
@@ -93,7 +96,7 @@ public class SynParser {
 
         }
 
-
+        System.out.println(pileContenuValue.getScopMap());
         AST.printNode(0);
         return AST;
     }

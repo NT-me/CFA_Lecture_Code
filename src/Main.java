@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import static Tools.lexicalType.*;
 import SyntaxicalParser.SynParser;
-
+import SyntaxicalParser.SyntaxicStack;
 public class Main {
 
     public static void main(String[] args) {
