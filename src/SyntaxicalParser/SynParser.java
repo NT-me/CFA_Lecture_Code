@@ -9,16 +9,15 @@ import static Tools.lexicalType.*;
 
 public class SynParser {
     public static Node parsing(ArrayList<LexicalToken> token){
-        Node AST = new Node();
+        RootNode AST = new RootNode();
         LexicalToken tokenVerification;
-        ContenuToken contenuToken = new ContenuToken();
+       /* ContenuToken contenuToken = new ContenuToken();
         //exemple: int a;
-        SyntaxiqueToken nodeToken = new SyntaxiqueToken(null, "", null);
+        SyntaxiqueToken nodeToken = new SyntaxiqueToken(null, "", null);*/
         ArrayList<LexicalToken> pileContenuValue = new ArrayList<>();
         LexicalToken lexicalValue = new LexicalToken();
         Node nodeToSetup;
         for(int i = 0;i< token.size();i++){
-
 
             tokenVerification = token.get(i);
             //Tant que l'on ne rencontre pas de ";" on ajoute les token dans la pile
@@ -31,14 +30,19 @@ public class SynParser {
                 if(pileContenuValue.get(j).getType() == BasicType){
                     //declarer une variable
                     if(variable.equals(pileContenuValue.get(j+1).getType())){
-                        nodeToken.setType(declarationVariable);
-                        nodeToken.setName(pileContenuValue.get(j+1).getValue());
-                        AST.newChild(nodeToken);
-                    } else if(function.equals(pileContenuValue.get(j+1).getType())){
+                        DeclarationNode nodeDec = new DeclarationNode();
+                        nodeDec.setName(pileContenuValue.get(j+1).getValue());
+                        nodeDec.setType(pileContenuValue.get(j).getValue());
+                        AST.addChild((Node) nodeDec);
+                    }
+
+
+
+                    /*else if(function.equals(pileContenuValue.get(j+1).getType())){
                         nodeToken.setType(declarationFunction);
                         nodeToken.setName(pileContenuValue.get(j+1).getValue());
                         AST.newChild(nodeToken);
-                    }  /*else{
+                    }  *//*else{
                         //throw ();
                     }*/
                 }

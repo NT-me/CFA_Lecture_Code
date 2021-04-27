@@ -2,38 +2,68 @@ package Tools;
 
 import java.util.ArrayList;
 
-public class Node {
-    private SyntaxiqueToken token;
-    private ArrayList<Node>children;
+public abstract class Node {
+    protected String type;
+    protected ArrayList<Node>children;
+    protected Node parent;
 
-    // Creating node without children
-    public Node(SyntaxiqueToken root){
-        this.token = root;
-        this.children = new ArrayList<>();
+    public Node() {
+        this.type = "";
+        this.children = new ArrayList<Node>();
+        this.parent = null;
     }
 
-    //Creating node with children
-    public Node(SyntaxiqueToken root, ArrayList<Node> children){
-        this.token = root;
+    public Node(String type) {
+        this.type = type;
+        this.children = new ArrayList<Node>();
+        this.parent = null;
+    }
+
+    public Node(String type, ArrayList<Node> children, Node parent) {
+        this.type = type;
+        this.children = children;
+        this.parent = parent;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public ArrayList<Node> getChildren() {
+        return children;
+    }
+
+    public void setChildren(ArrayList<Node> children) {
         this.children = children;
     }
 
-    public Node() {
-        this.token = null;
-        this.children = null;
+    public void addChild(Node child){
+        this.children.add(child);
+    }
+
+    public Node getParent() {
+        return parent;
+    }
+
+    public void setParent(Node parent) {
+        this.parent = parent;
     }
 
     // Utility function add child none
-    public Node newChild(SyntaxiqueToken childToken)
+    /*public Node newChild(SyntaxiqueToken childToken)
     {
         Node temp = new Node(childToken);
         this.children.add(temp);
         return temp;
-    }
+    }*/
 
     public void printNode(int depth){
         String indentlvl = " ".repeat(depth);
-        System.out.println(indentlvl + this.token.toString());
+        System.out.println(indentlvl + this.type.toString() + this.children);
 
         depth += 1;
         for(Node n : this.children) {
