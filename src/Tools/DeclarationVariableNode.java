@@ -1,14 +1,14 @@
 package Tools;
 
-public class DeclarationNode extends Node{
+public class DeclarationVariableNode extends Node{
 
     public String name;
-    public DeclarationNode(String type, String name) {
+    public DeclarationVariableNode(String type, String name) {
         super(type);
         this.name = name;
     }
 
-    public DeclarationNode() {
+    public DeclarationVariableNode() {
         super();
     }
 

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="Lecture d'une seule instruction simple fait !">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tools/DeclarationNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tools/RootNode.java" afterDir="false" />
+    <list default="true" id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="Lecture de plusieurs instructions simple fait !&#10;Création de Node + DeclarationNode + RootNode">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tools/DeclarationFunctionNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tools/ExpressionNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tools/IterationNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tools/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/DeclarationNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/DeclarationVariableNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/lexicalType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/lexicalType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +89,7 @@
       <option name="presentableId" value="Default" />
       <updated>1619432334360</updated>
       <workItem from="1619436917187" duration="423000" />
-      <workItem from="1619508558448" duration="16322000" />
+      <workItem from="1619508558448" duration="28988000" />
     </task>
     <task id="LOCAL-00001" summary="Enum + Type update&#10;parsing declaration &amp; affectation variable">
       <created>1619471929973</created>
@@ -110,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619525145980</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Lecture de plusieurs instructions simple fait !&#10;Création de Node + DeclarationNode + RootNode">
+      <created>1619533631415</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1619533631415</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -131,6 +140,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Enum + Type update&#10;parsing declaration &amp; affectation variable" />
     <MESSAGE value="Lecture d'une seule instruction simple fait !" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lecture d'une seule instruction simple fait !" />
+    <MESSAGE value="Lecture de plusieurs instructions simple fait !&#10;Création de Node + DeclarationNode + RootNode" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lecture de plusieurs instructions simple fait !&#10;Création de Node + DeclarationNode + RootNode" />
   </component>
 </project>

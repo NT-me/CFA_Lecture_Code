@@ -4,7 +4,6 @@ import Tools.*;
 
 import java.util.ArrayList;
 
-import static Tools.SyntaxiqueType.*;
 import static Tools.lexicalType.*;
 
 public class SynParser {
@@ -21,7 +20,7 @@ public class SynParser {
 
             tokenVerification = token.get(i);
             //Tant que l'on ne rencontre pas de ";" on ajoute les token dans la pile
-            if(!endInstruction.equals(tokenVerification.getType())){
+            if(!EoI.equals(tokenVerification.getType())){
                 pileContenuValue.add(tokenVerification);
                 continue;
             }
@@ -29,21 +28,31 @@ public class SynParser {
             for (int j = 0; j<pileContenuValue.size();j++){
                 if(pileContenuValue.get(j).getType() == BasicType){
                     //declarer une variable
-                    if(variable.equals(pileContenuValue.get(j+1).getType())){
-                        DeclarationNode nodeDec = new DeclarationNode();
+                    if(Var.equals(pileContenuValue.get(j+1).getType())){
+                        DeclarationVariableNode nodeDec = new DeclarationVariableNode();
                         nodeDec.setName(pileContenuValue.get(j+1).getValue());
                         nodeDec.setType(pileContenuValue.get(j).getValue());
                         AST.addChild((Node) nodeDec);
                     }
+                    else if(Function.equals(pileContenuValue.get(j+1).getType()) && Lp.equals(pileContenuValue.get(j+2))){
+                        DeclarationFunctionNode nodeFunc = new DeclarationFunctionNode();
+                        nodeFunc.setName(pileContenuValue.get(j+1).getValue());
+                        nodeFunc.setType(pileContenuValue.get(j).getValue());
+                        int k = 0;
+                        for(k = j; k < pileContenuValue.size(); k++){
+                            if (")".equals(pileContenuValue.get(k))){
+                                break;
+                            }
+                            nodeFunc.addParams(pileContenuValue.get(k).getValue());
+                        }
+                        if ("{".equals(pileContenuValue.get(k))) {
+                            for (int l = k;l<pileContenuValue.size();l++){
 
-
-
-                    /*else if(function.equals(pileContenuValue.get(j+1).getType())){
-                        nodeToken.setType(declarationFunction);
-                        nodeToken.setName(pileContenuValue.get(j+1).getValue());
-                        AST.newChild(nodeToken);
-                    }  *//*else{
-                        //throw ();
+                            }
+                        }
+                        AST.addChild((Node) nodeFunc);
+                    }  /*else{
+                        throw ();
                     }*/
                 }
             }
