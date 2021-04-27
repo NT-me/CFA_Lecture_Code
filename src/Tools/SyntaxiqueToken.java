@@ -34,4 +34,13 @@ public class SyntaxiqueToken {
     public void setValue(ContenuToken contenu) {
         this.contenu = contenu;
     }
+
+    @Override
+    public String toString() {
+        return "SyntaxiqueToken{" +
+                "type=" + type +
+                ", name='" + name + '\'' +
+                ", contenu=" + contenu +
+                '}';
+    }
 }

@@ -30,4 +30,14 @@ public class Node {
         this.children.add(temp);
         return temp;
     }
+
+    public void printNode(int depth){
+        String indentlvl = " ".repeat(depth);
+        System.out.println(indentlvl + this.token.toString());
+
+        depth += 1;
+        for(Node n : this.children) {
+            n.printNode(depth);
+        }
+    }
 }

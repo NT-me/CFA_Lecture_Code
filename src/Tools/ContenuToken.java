@@ -9,6 +9,11 @@ public class ContenuToken {
         this.value = value;
     }
 
+    public ContenuToken() {
+        this.type = null;
+        this.value = "";
+    }
+
     public ContenuType getType() {
         return type;
     }

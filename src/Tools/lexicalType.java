@@ -20,5 +20,7 @@ public enum lexicalType {
     bool,
     list,
 
-    KeywordType
+    BasicType,
+    variable,
+    function
 }
