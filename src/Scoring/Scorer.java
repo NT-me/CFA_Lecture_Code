@@ -24,6 +24,21 @@ public class Scorer {
         return res;
     }
 
+    private static ArrayList<String> extractVarAffectationInList(Node ast){
+        ArrayList<String> res = new ArrayList<String>();
+
+        if (ast instanceof AffectationNode){
+            DeclarationNode currentNode = (DeclarationNode) ast;
+            res.add(currentNode.getName());
+        }
+
+        for (Node n : ast.getChildren()){
+            res.addAll(extractVarAffectationInList(n));
+        }
+
+        return res;
+    }
+
 /*    ArrayList<String> extractFunDeclarationsInList(Node ast){
 
     }*/
@@ -43,7 +58,16 @@ public class Scorer {
         return retErrors;
     }
 
-/*    ArrayList<String> checkUsedDecl(Node asr){
+    ArrayList<String> checkUsedDecl(Node ast){
+        ArrayList<String> varDeclList = extractVarDeclarationsInList(ast);
+        ArrayList<String> varAffectList = extractVarAffectationInList(ast);
+        ArrayList<String> retErrors = new ArrayList<String>();
 
-    }*/
+        for (String word: varDeclList){
+            if (!varAffectList.contains(word)){
+                retErrors.add(word);
+            }
+        }
+        return retErrors;
+    }
 }
