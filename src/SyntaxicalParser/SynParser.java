@@ -6,6 +6,14 @@ import java.util.ArrayList;
 
 import static Tools.lexicalType.*;
 
+class SyntaxError extends Exception {
+    SyntaxError(String msg){
+        super("An syntax error has been discovered by your favorite pre-compile and scoring tools: "+msg);
+    }
+}
+
+
+
 public class SynParser {
     public static Node parsing(ArrayList<LexicalToken> token){
         RootNode AST = new RootNode();
@@ -16,6 +24,8 @@ public class SynParser {
         ArrayList<LexicalToken> pileContenuValue = new ArrayList<>();
         LexicalToken lexicalValue = new LexicalToken();
         Node nodeToSetup;
+
+
         for(int i = 0;i< token.size();i++){
 
             tokenVerification = token.get(i);
@@ -24,6 +34,7 @@ public class SynParser {
                 pileContenuValue.add(tokenVerification);
                 continue;
             }
+
             //Si l'instruction commence par un type, on declare une variable ou fonction, sinon erreur ?
             for (int j = 0; j<pileContenuValue.size();j++){
                 if(pileContenuValue.get(j).getType() == BasicType){
@@ -34,7 +45,10 @@ public class SynParser {
                         nodeDec.setType(pileContenuValue.get(j).getValue());
                         AST.addChild((Node) nodeDec);
                     }
-                    else if(Function.equals(pileContenuValue.get(j+1).getType()) && Lp.equals(pileContenuValue.get(j+2))){
+
+                    else if(Function.equals(pileContenuValue.get(j+1).getType())
+                            && Lp.equals(pileContenuValue.get(j+2))){
+
                         DeclarationFunctionNode nodeFunc = new DeclarationFunctionNode();
                         nodeFunc.setName(pileContenuValue.get(j+1).getValue());
                         nodeFunc.setType(pileContenuValue.get(j).getValue());
@@ -51,9 +65,17 @@ public class SynParser {
                             }
                         }
                         AST.addChild((Node) nodeFunc);
-                    }  /*else{
-                        throw ();
-                    }*/
+                    }
+                    else{
+                        // Try cath sans doute en trop mais osef un peu
+                        String msg = " Strange thing after an type";
+                        SyntaxError exName = new SyntaxError(msg);
+                        try {
+                            throw exName;
+                        } catch (SyntaxError syntaxError) {
+                            syntaxError.printStackTrace();
+                        }
+                    }
                 }
             }
             pileContenuValue.clear();
@@ -70,6 +92,8 @@ public class SynParser {
                 }*/
 
         }
+
+
         AST.printNode(0);
         return AST;
     }

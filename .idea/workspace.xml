@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="Lecture de plusieurs instructions simple fait !&#10;Création de Node + DeclarationNode + RootNode">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tools/DeclarationFunctionNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tools/ExpressionNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tools/IterationNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SyntaxicalParser/SyntaxicStack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tools/DeclarationNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/DeclarationVariableNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tools/lexicalType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/lexicalType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,13 +57,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
