@@ -1,3 +1,4 @@
+import Scoring.Scorer;
 import Tools.LexicalToken;
 
 import java.util.ArrayList;
@@ -5,15 +6,16 @@ import java.util.List;
 
 import static Tools.lexicalType.*;
 import SyntaxicalParser.SynParser;
-import com.sun.source.tree.*;
+import Tools.Node;
 import Tools.LexicalToken.*;
+import Scoring.Scorer.*;
 
 public class Main {
 
     public static void main(String[] args) {
         ArrayList<LexicalToken> phrase = new ArrayList<>();
         LexicalToken token = new LexicalToken(BasicType,"int");
-        LexicalToken token2 = new LexicalToken(variable,"a");
+        LexicalToken token2 = new LexicalToken(variable,"AAh");
         LexicalToken token3 = new LexicalToken(endInstruction,";");
 
         LexicalToken token4 = new LexicalToken(BasicType,"char");
@@ -36,8 +38,13 @@ public class Main {
         phrase.add(token8);
         phrase.add(token9);
 
+        Node retAST = SynParser.parsing(phrase);
+        ArrayList<String> scoringRet = Scorer.varNameConventions(retAST);
 
-        SynParser.parsing(phrase);
+        System.out.println("\n\n====== Scoring ret : ======");
+        System.out.println(scoringRet.size());
+        for (String s : scoringRet){
+            System.out.println(s);
+        }
     }
-
 }
