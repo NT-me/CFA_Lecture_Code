@@ -1,15 +1,14 @@
 int main(){
-    int a = 0 ;   
+    if
 
-
-    int b = 1 ;   
-
-
-
-
-        
+    int a;   
+    int bfg ;  
+    int c=10;  
+    int x= 10;   
+    int forbbfgf=1;   
 
     int result = addInt(a, b);
     printf("%d", result);
     return 0;
 }
+

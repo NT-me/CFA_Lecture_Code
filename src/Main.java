@@ -8,6 +8,7 @@ public class Main {
 
         ArrayList<String> mots = Lexer.fileToMots("./src/source.c");
 
+        
 
         // ArrayList<String> lines = getLignes("./src/source.c");
         // String uneLigne = lines.get(0);
@@ -39,9 +40,35 @@ public class Main {
 
         for (String mot : mots) {
 
-            System.out.println(">" + mot + "<");
+            System.out.println("mot -->" +  mot + "<");
+            // System.out.println(">" + mot.length() + "<");
+
             // System.out.println("__size mot :"+mot.length());
 
         }
+
+
+        // for (String key : keywords) {
+
+        //     System.out.println(">" + key + "<");
+
+        //     // System.out.println("__size mot :"+mot.length());
+
+        // }
+
+
+
+
+        ArrayList<String> tokens =Lexer.motsToTokens(mots);
+        for (String token : tokens) {
+
+            System.out.println("token -->" + token + "<");
+
+            // System.out.println("__size mot :"+mot.length());
+
+        }
+
+        System.out.println("nb de tokens total:"+tokens.size());
+
     }
 }
