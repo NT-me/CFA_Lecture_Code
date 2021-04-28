@@ -21,7 +21,7 @@ public class SynParser {
 
             tokenVerification = token.get(i);
             //Tant que l'on ne rencontre pas de ";" on ajoute les token dans la pile
-            if(!endInstruction.equals(tokenVerification.getType())){
+            if(!EoI.equals(tokenVerification.getType())){
                 pileContenuValue.add(tokenVerification);
                 continue;
             }
@@ -29,7 +29,7 @@ public class SynParser {
             for (int j = 0; j<pileContenuValue.size();j++){
                 if(pileContenuValue.get(j).getType() == BasicType){
                     //declarer une variable
-                    if(variable.equals(pileContenuValue.get(j+1).getType())){
+                    if(Word.equals(pileContenuValue.get(j+1).getType())){
                         DeclarationNode nodeDec = new DeclarationNode();
                         nodeDec.setName(pileContenuValue.get(j+1).getValue());
                         nodeDec.setType(pileContenuValue.get(j).getValue());
