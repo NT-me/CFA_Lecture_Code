@@ -1,12 +1,18 @@
 import LexicalParser.*;
+import Tools.LexicalToken;
+
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, Worldddddd!");
 
-        ArrayList<String> mots = Lexer.fileToMots("./src/source.c");
+        // ArrayList<String> mots = Lexer.fileToMots("./src/source.c");
+        Lexer.fileToTokens("./src/source.c");
 
         
 
@@ -38,14 +44,18 @@ public class Main {
         // }
         // System.out.println("\nNB MOTS TOTAL  : " + nbmots);
 
-        for (String mot : mots) {
+        ArrayList<LexicalToken> tokens=Lexer.cleanArray(Lexer.tokenList);
+        
+        for (LexicalToken token : tokens) {
 
-            System.out.println("mot -->" +  mot + "<");
+            System.out.println("token -->" +  token.getValue() + "<");
             // System.out.println(">" + mot.length() + "<");
 
             // System.out.println("__size mot :"+mot.length());
 
         }
+                System.out.println("nb de tokens total:"+tokens.size());
+
 
 
         // for (String key : keywords) {
@@ -59,16 +69,28 @@ public class Main {
 
 
 
-        ArrayList<String> tokens =Lexer.motsToTokens(mots);
-        for (String token : tokens) {
+        // ArrayList<String> tokens =Lexer.motsToTokens(mots);
+        // for (String token : tokens) {
 
-            System.out.println("token -->" + token + "<");
+        //     System.out.println("token -->" + token + "<");
 
-            // System.out.println("__size mot :"+mot.length());
+        //     // System.out.println("__size mot :"+mot.length());
 
-        }
+        // }
 
-        System.out.println("nb de tokens total:"+tokens.size());
+        // System.out.println("nb de tokens total:"+tokens.size());
+
+
+        // Set set = Lexer.getIndentation().entrySet();
+        // Iterator i = set.iterator();
+      
+        // // Display elements
+        // while(i.hasNext()) {
+        //    Map.Entry me = (Map.Entry)i.next();
+        //    System.out.print(me.getKey() + ": ");
+        //    System.out.println(me.getValue());
+        // }
+        // System.out.println("nbLignes:"+Lexer.nbLignes);
 
     }
 }
