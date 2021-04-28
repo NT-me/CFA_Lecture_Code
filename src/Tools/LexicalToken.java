@@ -4,8 +4,6 @@ public class LexicalToken {
     private lexicalType type;
     private String value;
 
-
-
     public lexicalType getType() {
         return type;
     }
@@ -30,5 +28,10 @@ public class LexicalToken {
     public LexicalToken() {
         this.type = null;
         this.value = "";
+    }
+
+    public void setToken(LexicalToken token) {
+        this.setValue(token.getValue());
+        this.setType(token.getType());
     }
 }

@@ -4,37 +4,37 @@ import java.util.ArrayList;
 
 import static Tools.lexicalType.*;
 import SyntaxicalParser.SynParser;
-import SyntaxicalParser.SyntaxicStack;
+
 public class Main {
 
     public static void main(String[] args) {
         ArrayList<LexicalToken> phrase = new ArrayList<>();
         LexicalToken token = new LexicalToken(BasicType,"int");
-        LexicalToken token2 = new LexicalToken(Var,"a");
+        LexicalToken token2 = new LexicalToken(Word,"a");
         LexicalToken token3 = new LexicalToken(EoI,";");
 
         LexicalToken token4 = new LexicalToken(BasicType,"char");
-        LexicalToken token5 = new LexicalToken(Var,"b");
+        LexicalToken token5 = new LexicalToken(Word,"b");
         LexicalToken token6 = new LexicalToken(EoI,";");
 
         LexicalToken token7 = new LexicalToken(BasicType,"bool");
-        LexicalToken token8 = new LexicalToken(Var,"c");
+        LexicalToken token8 = new LexicalToken(Word,"c");
         LexicalToken token9 = new LexicalToken(EoI,";");
 
         LexicalToken token10 = new LexicalToken(BasicType,"int");
         LexicalToken token11 = new LexicalToken(Function,"main");
         LexicalToken token12 = new LexicalToken(Lp,"(");
         LexicalToken token13 = new LexicalToken(BasicType,"int");
-        LexicalToken token14 = new LexicalToken(Var,"a");
+        LexicalToken token14 = new LexicalToken(Word,"a");
         LexicalToken token15 = new LexicalToken(virgule,",");
         LexicalToken token16 = new LexicalToken(BasicType,"int");
-        LexicalToken token17 = new LexicalToken(Var,"b");
+        LexicalToken token17 = new LexicalToken(Word,"b");
         LexicalToken token18 = new LexicalToken(Rp,")");
         LexicalToken token19 = new LexicalToken(Lb,"{");
         LexicalToken token20 = new LexicalToken(Keyword,"return");
-        LexicalToken token21 = new LexicalToken(Var,"a");
+        LexicalToken token21 = new LexicalToken(Word,"a");
         LexicalToken token22 = new LexicalToken(Ope,"+");
-        LexicalToken token23 = new LexicalToken(Var,"b");
+        LexicalToken token23 = new LexicalToken(Word,"b");
         LexicalToken token24 = new LexicalToken(EoI,";");
         LexicalToken token25 = new LexicalToken(Rb,"}");
 
