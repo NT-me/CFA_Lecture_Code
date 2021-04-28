@@ -2,14 +2,14 @@ package Tools;
 
 import java.util.ArrayList;
 
-public class ExpressionNode extends Node{
+public class BodyNode extends Node{
     public ArrayList<IterationNode> iteration;
 
-    public ExpressionNode(ArrayList<IterationNode> iteration) {
+    public BodyNode(ArrayList<IterationNode> iteration) {
         this.iteration = iteration;
     }
 
-    public ExpressionNode() {
+    public BodyNode() {
         super();
         this.iteration = new ArrayList<IterationNode>();
     }

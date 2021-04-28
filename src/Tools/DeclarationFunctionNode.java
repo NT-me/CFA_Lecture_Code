@@ -1,32 +1,31 @@
 package Tools;
 
-import java.beans.Expression;
 import java.util.ArrayList;
 
 public class DeclarationFunctionNode extends Node{
 
     public String name;
-    public ArrayList<String> params;
-    public ExpressionNode expression;
-    public DeclarationFunctionNode(String type, String name, ExpressionNode expression) {
+    public ArrayList<DeclarationVariableNode> params;
+    public BodyNode body;
+    public DeclarationFunctionNode(String type, String name, BodyNode body) {
         super(type);
         this.name = name;
-        this.params = new ArrayList<String>();
-        this.expression = expression;
+        this.params = new ArrayList<DeclarationVariableNode>();
+        this.body = body;
     }
 
-    public DeclarationFunctionNode(String type, String name, ArrayList<String> params, ExpressionNode expression) {
+    public DeclarationFunctionNode(String type, String name, ArrayList<DeclarationVariableNode> params, BodyNode body) {
         super(type);
         this.name = name;
         this.params = params;
-        this.expression = expression;
+        this.body = body;
     }
 
     public DeclarationFunctionNode() {
         super();
         this.name = "";
-        this.params = new ArrayList<String>();
-        this.expression = new ExpressionNode();
+        this.params = new ArrayList<DeclarationVariableNode>();
+        this.body = new BodyNode();
     }
 
     public String getName() {
@@ -37,23 +36,23 @@ public class DeclarationFunctionNode extends Node{
         this.name = name;
     }
 
-    public ArrayList<String> getParams() {
+    public ArrayList<DeclarationVariableNode> getParams() {
         return params;
     }
 
-    public void setParams(ArrayList<String> params) {
+    public void setParams(ArrayList<DeclarationVariableNode> params) {
         this.params = params;
     }
 
-    public void addParams(String param){
+    public void addParams(DeclarationVariableNode param){
         this.params.add(param);
     }
 
-    public ExpressionNode getExpression() {
-        return expression;
+    public BodyNode getBody() {
+        return body;
     }
 
-    public void setExpression(ExpressionNode expression) {
-        this.expression = expression;
+    public void setBody(BodyNode body) {
+        this.body = body;
     }
 }

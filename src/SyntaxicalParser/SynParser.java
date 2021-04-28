@@ -29,10 +29,12 @@ public class SynParser {
 
 
         for(int i = 0;i< token.size();i++){
-
+// ( ) { }
             tokenVerification = token.get(i);
             //Tant que l'on ne rencontre pas de ";" on ajoute les token dans la pile
-            if(!EoI.equals(tokenVerification.getType())){
+            if(!EoI.equals(tokenVerification.getType())
+                    && !Lp.equals(tokenVerification.getType())
+                    && !Lp.equals(tokenVerification.getType())){
                 pileContenuValue.pushReadStack(scope, tokenVerification);
                 continue;
             }
