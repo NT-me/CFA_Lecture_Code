@@ -1,7 +1,8 @@
 int main(){
+    
     for(int i=0;i<10;i++){}
+    int bfg; 
 
-    int bfg;  
     int fori=34;   
     int x= 10; 
     int z =20;   
@@ -10,7 +11,3 @@ int main(){
     printf("%d hjh", result );
     return 0;
 }
-
-
-
-//\t

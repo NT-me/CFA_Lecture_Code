@@ -18,16 +18,17 @@ enum lexicalType {
     equal,
     point,
     bool,
-    list
+    list,
+
 }
 
 public class LexicalToken {
-    private lexicalType type;
+    private String type;
     private String value;
     private int line;
 
 
-    public lexicalType getType() {
+    public String getType() {
         return type;
     }
 
@@ -39,7 +40,7 @@ public class LexicalToken {
         this.line = numLigne;
     }
 
-    public void setType(lexicalType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -51,7 +52,7 @@ public class LexicalToken {
         this.value = value;
     }
 
-    public LexicalToken(lexicalType type, String value, int line) {
+    public LexicalToken(String type, String value, int line) {
         this.type = type;
         this.value = value;
         this.line = line;

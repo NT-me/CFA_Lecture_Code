@@ -9,24 +9,29 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class Lexer {
 
     private static int LARGESTTOKEN;
-    public static String  tokenPrecedent="";
-    public static LexicalToken  tokenPrecedentCopy=new LexicalToken(null, "", -1);
+    public static String tokenPrecedent = "";
+    public static LexicalToken tokenPrecedentCopy = new LexicalToken(null, "", -1);
 
     public static HashMap hm = new HashMap();
-    public static ArrayList<LexicalToken> tokenList= new ArrayList<LexicalToken>() ;
-    public static  int numLigne=0;
-    public static  int cptLigne=0;
+    public static ArrayList<LexicalToken> tokenList = new ArrayList<LexicalToken>();
+    public static int numLigne = 0;
+    public static int cptLigne = 0;
 
-    public static  int nbLignes;
+    public static int nbLignes;
 
+    private static Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
-    
-
-
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        return pattern.matcher(strNum).matches();
+    }
 
     public static ArrayList<String> fileToMots(String file) throws IOException {
         ArrayList<String> lines = getLignes("./src/source.c");
@@ -49,10 +54,126 @@ public class Lexer {
             // }
         }
         System.out.println("\nNB MOTS TOTAL  : " + mots.size());
-        nbLignes=hm.size();
-
+        nbLignes = hm.size();
 
         return mots;
+
+    }
+
+    public static void typage(ArrayList<LexicalToken> tokens) {
+        LexicalToken token;
+        LexicalToken prec = null;
+        LexicalToken suiv = null;
+
+        int length = tokens.size();
+        for (int i = 0; i < length; i++) {
+            token = tokens.get(i);
+            if (i > 0) {
+                prec = tokens.get(i - 1);
+            } else
+                prec = null;
+
+            if (i < length - 2) {
+                suiv = tokens.get(i + 1);
+            } else
+                suiv = null;
+
+            switch (token.getValue()) {
+            case "(":
+                token.setType("Lp");
+                // code block
+                break;
+
+            case ")":
+                token.setType("Rp");
+                // code block
+                break;
+            case "int":
+                token.setType("BasicType");
+                // code block
+                break;
+            case "main":
+                token.setType("Lp");
+                // code block
+                break;
+            case "float":
+                token.setType("BasicType");
+                // code block
+                break;
+            case "for":
+                token.setType("KeyWord");
+                // code block
+                break;
+            case "if":
+                token.setType("KeyWord");
+                // code block
+                break;
+            case "\"":
+                token.setType("\"");
+                // code block
+                break;
+            case "{":
+                token.setType("Lb");
+                // code block
+                break;
+            case "}":
+                token.setType("Rb");
+                // code block
+                break;
+            case "=":
+                token.setType("Ope");
+                // code block
+                break;
+            case ";":
+                token.setType("EoI");
+                // code block
+                break;
+            case ",":
+                token.setType("coma");
+                // code block
+                break;
+
+            case "return":
+                token.setType("KeyWord");
+                // code block
+                break;
+
+            default:
+                token.setType("word");
+            }
+
+            if (prec != null) {
+
+                switch (prec.getValue()) {
+                case "int":
+                    token.setType("word");
+                    // code block
+                    break;
+                case "float":
+                    token.setType("word");
+                    // code block
+                    break;
+                }
+            }
+
+            if (suiv != null) {
+
+                switch (suiv.getValue()) {
+                case "(":
+                    token.setType("function");
+                    // code block
+                    break;
+
+                }
+
+            }
+
+            if(isNumeric(token.getValue())){
+                token.setType("number");
+                
+            }
+
+        }
 
     }
 
@@ -85,8 +206,7 @@ public class Lexer {
         return null;
     }
 
-
-    public static LexicalToken splitOneTokenCopy(String mot) {
+    public static LexicalToken splitOneTokenCopy(String mot, int line) {
         ArrayList<String> keywords = Lexer.getKeyWords();
 
         int length = mot.length();
@@ -105,8 +225,7 @@ public class Lexer {
             if (key.equals(mot)) {
                 // System.out.println(mot);
 
-
-                return new LexicalToken(null, mot, -1);
+                return new LexicalToken(null, mot, line);
             }
 
         }
@@ -116,54 +235,47 @@ public class Lexer {
         return null;
     }
 
-
-    public static  void  fileToTokens(String file) throws IOException {
+    public static void fileToTokens(String file) throws IOException {
         ArrayList<String> lines = getLignes("./src/source.c");
 
         ArrayList<LexicalToken> mots = new ArrayList<LexicalToken>();
 
         // int nbmots = 0;
         for (String line : lines) {
-            mots.addAll(getMotsCopy(line ));
+            mots.addAll(getMotsCopy(line));
 
         }
-        System.out.println("\nNB MOTS TOTAL  : " + mots.size());
-        nbLignes=hm.size();
-
+        // System.out.println("\nNB MOTS TOTAL  : " + mots.size());
+        nbLignes = hm.size();
 
         // return mots;
 
-        
-        for (LexicalToken mot : mots) {
+        // for (LexicalToken mot : mots) {
 
-            System.out.println("mot -->" +  mot.getValue() + "<");
-            // System.out.println(">" + mot.length() + "<");
+        // System.out.println("mot -->" + mot.getValue() + "<");
+        // System.out.println("ligne -->" + mot.getLine() + "<\n");
 
-            // System.out.println("__size mot :"+mot.length());
+        // // System.out.println(">" + mot.length() + "<");
 
-        }
+        // // System.out.println("__size mot :"+mot.length());
 
+        // }
 
         // ArrayList<LexicalToken> tokens = new ArrayList<LexicalToken>();
         int length = mots.size();
         for (int i = 0; i < length; i++) {
 
             // if (!tokens.isEmpty()) {
-            //     tokenPrecedentCopy = tokens.get(tokens.size()-1);
+            // tokenPrecedentCopy = tokens.get(tokens.size()-1);
             // }
             splitTokenCopy(mots.get(i));
         }
 
-
-        // tokens=cleanArray(tokens);
-
-
-
+        cleanArray();
+        typage(tokenList);
 
 
     }
-
-
 
     public static ArrayList<String> motsToTokens(ArrayList<String> mots) {
         ArrayList<String> tokens = new ArrayList<String>();
@@ -171,29 +283,24 @@ public class Lexer {
         for (int i = 0; i < length; i++) {
 
             if (!tokens.isEmpty()) {
-                tokenPrecedent = tokens.get(tokens.size()-1);
+                tokenPrecedent = tokens.get(tokens.size() - 1);
             }
             tokens.addAll(splitTokenSave2(mots.get(i)));
         }
-
 
         // tokens=cleanArray(tokens);
         return tokens;
 
     }
 
-
-    public static HashMap getIndentation(){
+    public static HashMap getIndentation() {
         return hm;
     }
-
-
-
 
     public static ArrayList<LexicalToken> splitTokenCopy(LexicalToken lexicalToken) {
         ArrayList<LexicalToken> tokens = new ArrayList<LexicalToken>();
         int fullWordSize = lexicalToken.getValue().length();
-        boolean cutted=false;
+        boolean cutted = false;
         int length = lexicalToken.getValue().length();
         ArrayList<LexicalToken> token = new ArrayList<LexicalToken>();
 
@@ -204,25 +311,26 @@ public class Lexer {
             substring = lexicalToken.getValue().substring(0, i + 1);
             c = substring.charAt(i);
 
-            cutted = analyzeSubstringCopy(substring, i, c, fullWordSize);
+            cutted = analyzeSubstringCopy(substring, i, c, fullWordSize, lexicalToken.getLine());
 
             if (cutted) {
 
                 // tokens.addAll(token);
                 // tokenPrecedentCopy = token.get(token.size() - 1);
-                lexicalToken =new LexicalToken(null, lexicalToken.getValue().substring(i + 1, length), -1) ;
+                lexicalToken = new LexicalToken(null, lexicalToken.getValue().substring(i + 1, length),
+                        lexicalToken.getLine());
                 length = lexicalToken.getValue().length();
                 i = -1;
-                cutted=false;
+                cutted = false;
 
             }
         }
 
         // if (tokenPrecedent.equals("int") && !mot.isBlank())
-        if (!lexicalToken.getValue().isBlank()){
+        if (!lexicalToken.getValue().isBlank()) {
 
             tokenList.add(lexicalToken);
-            tokenPrecedentCopy=new LexicalToken(null, lexicalToken.getValue(), -1);
+            tokenPrecedentCopy = new LexicalToken(null, lexicalToken.getValue(), -1);
             // System.out.println(tokenPrecedent +"<----- tok prec");
         }
         return tokens;
@@ -256,12 +364,12 @@ public class Lexer {
         }
 
         // if (tokenPrecedent.equals("int") && !mot.isBlank())
-        if (!mot.isBlank()){
+        if (!mot.isBlank()) {
 
             tokens.add(mot);
-            tokenPrecedent=mot;
+            tokenPrecedent = mot;
         }
-            // System.out.println(tokenPrecedent +"<----- tok prec");
+        // System.out.println(tokenPrecedent +"<----- tok prec");
 
         return tokens;
     }
@@ -269,26 +377,23 @@ public class Lexer {
     private static ArrayList<String> analyzeSubstring(String mot, int i, char c, int fullWordSize) {
         ArrayList<String> tokens = new ArrayList<String>();
         String token = "";
-        String chara=String.valueOf(c);
+        String chara = String.valueOf(c);
         // String test2=c.toString();
-        
 
+        // System.out.println(mot+": SUBS et C:"+c +" preced:"+tokenPrecedent);
 
-        // System.out.println(mot+": SUBS  et C:"+c +"  preced:"+tokenPrecedent);
-
-        
-        if(splitOneToken(chara)!=null){
+        if (splitOneToken(chara) != null) {
             tokenPrecedent = mot.substring(0, i);
             tokens.add(mot.substring(0, i));
             tokenPrecedent = mot.substring(i, i + 1);
             tokens.add(mot.substring(i, i + 1));
         }
 
-        else if (tokenPrecedent.equals("int") ) {
+        else if (tokenPrecedent.equals("int")) {
             if (c == '=' || c == ';') {
                 // System.out.println("XXXXX:" + mot.substring(0, i));
                 tokenPrecedent = mot.substring(0, i);
-                // System.out.println("chara:"+c+"     subs:"+mot);
+                // System.out.println("chara:"+c+" subs:"+mot);
 
                 // System.out.println(tokenPrecedent+"-1");
                 tokens.add(mot.substring(0, i));
@@ -307,31 +412,30 @@ public class Lexer {
 
         }
         // else if (tokenPrecedent.equals("=")) {
-        //     if(c == ';'){
-        //         // System.out.println("XXXXX:" + mot.substring(0, i));
-        //         tokenPrecedent = mot.substring(0, i);
-        //         System.out.println("chara:"+c+"     subs:"+mot);
-        //         System.out.println(tokenPrecedent+"-3");
-        //         tokens.add(mot.substring(0, i));
+        // if(c == ';'){
+        // // System.out.println("XXXXX:" + mot.substring(0, i));
+        // tokenPrecedent = mot.substring(0, i);
+        // System.out.println("chara:"+c+" subs:"+mot);
+        // System.out.println(tokenPrecedent+"-3");
+        // tokens.add(mot.substring(0, i));
 
-        //         tokenPrecedent = mot.substring(i, i + 1);
-        //         System.out.println(tokenPrecedent+"-4");
-        //         tokens.add(mot.substring(i, i + 1));
+        // tokenPrecedent = mot.substring(i, i + 1);
+        // System.out.println(tokenPrecedent+"-4");
+        // tokens.add(mot.substring(i, i + 1));
 
-        //         // System.out.println("RESTE:" + mot.substring(i + 1, length));
-        //         // mot = mot.substring(i + 1, length);
-        //         // substring = mot;
-        //         // length = mot.length();
-        //         // i = -1;
+        // // System.out.println("RESTE:" + mot.substring(i + 1, length));
+        // // mot = mot.substring(i + 1, length);
+        // // substring = mot;
+        // // length = mot.length();
+        // // i = -1;
 
-
-        //     }
+        // }
         // }
         else if (tokenPrecedent.equals("return")) {
-            if(c == ';'){
+            if (c == ';') {
                 // System.out.println("XXXXX:" + mot.substring(0, i));
                 tokenPrecedent = mot.substring(0, i);
-                // System.out.println("chara:"+c+"     subs:"+mot);
+                // System.out.println("chara:"+c+" subs:"+mot);
                 // System.out.println(tokenPrecedent+"-3");
                 tokens.add(mot.substring(0, i));
 
@@ -345,24 +449,18 @@ public class Lexer {
                 // length = mot.length();
                 // i = -1;
 
-
             }
-        }
-        else {
+        } else {
 
             token = splitOneToken(mot);
 
             if (token != null) {
                 tokenPrecedent = token;
-                // System.out.println("chara:"+c+"     subs:"+mot);
+                // System.out.println("chara:"+c+" subs:"+mot);
 
                 // System.out.println(tokenPrecedent+"-5");
 
                 tokens.add(token);
-   
-
-                
-
 
                 // mot = mot.substring(i + 1, length);
 
@@ -372,50 +470,39 @@ public class Lexer {
         }
         // if(fullWordSize-1== i)
 
-
-
         return tokens;
     }
 
-
-
-
-
-
-
-    private static boolean analyzeSubstringCopy(String mot, int i, char c, int fullWordSize) {
+    private static boolean analyzeSubstringCopy(String mot, int i, char c, int fullWordSize, int line) {
         ArrayList<LexicalToken> tokens = new ArrayList<LexicalToken>();
         LexicalToken token = new LexicalToken(null, "", -1);
-        String chara=String.valueOf(c);
-        boolean cutted=false;
+        String chara = String.valueOf(c);
+        boolean cutted = false;
         // String test2=c.toString();
-        
 
+        // System.out.println(mot+": SUBS et C:"+c +" preced:"+tokenPrecedent);
 
-        // System.out.println(mot+": SUBS  et C:"+c +"  preced:"+tokenPrecedent);
-
-        
-        if(splitOneTokenCopy(chara)!=null){
-            tokenPrecedentCopy = new LexicalToken(null, mot.substring(0, i), -1);
-            tokenList.add(new LexicalToken(null, mot.substring(0, i), -1) );
-            tokenPrecedentCopy = new LexicalToken(null,mot.substring(i, i + 1), -1);
-            tokenList.add(new LexicalToken(null, mot.substring(i, i + 1), -1) );
-            cutted=true;
+        if (splitOneTokenCopy(chara, line) != null) {
+            tokenPrecedentCopy = new LexicalToken(null, mot.substring(0, i), line);
+            tokenList.add(new LexicalToken(null, mot.substring(0, i), line));
+            tokenPrecedentCopy = new LexicalToken(null, mot.substring(i, i + 1), line);
+            tokenList.add(new LexicalToken(null, mot.substring(i, i + 1), line));
+            cutted = true;
         }
 
-        else if (tokenPrecedentCopy.getValue().equals("int") ) {
+        else if (tokenPrecedentCopy.getValue().equals("int")) {
             if (c == '=' || c == ';') {
                 // System.out.println("XXXXX:" + mot.substring(0, i));
-                tokenPrecedentCopy = new LexicalToken(null, mot.substring(0, i), -1);
-                // System.out.println("chara:"+c+"     subs:"+mot);
+                tokenPrecedentCopy = new LexicalToken(null, mot.substring(0, i), line);
+                // System.out.println("chara:"+c+" subs:"+mot);
 
                 // System.out.println(tokenPrecedent+"-1");
-                tokenList.add(new LexicalToken(null, mot.substring(0, i), -1) );
+                tokenList.add(new LexicalToken(null, mot.substring(0, i), line));
 
-                tokenPrecedentCopy = new LexicalToken(null,mot.substring(i, i + 1), -1);
+                tokenPrecedentCopy = new LexicalToken(null, mot.substring(i, i + 1), line);
                 // System.out.println(tokenPrecedent+"-2");
-                tokenList.add(new LexicalToken(null, mot.substring(i, i + 1), -1) );
-                cutted=true;
+                tokenList.add(new LexicalToken(null, mot.substring(i, i + 1), line));
+                cutted = true;
                 // System.out.println("RESTE:" + mot.substring(i + 1, length));
                 // mot = mot.substring(i + 1, length);
                 // substring = mot;
@@ -426,62 +513,55 @@ public class Lexer {
 
         }
         // else if (tokenPrecedent.equals("=")) {
-        //     if(c == ';'){
-        //         // System.out.println("XXXXX:" + mot.substring(0, i));
-        //         tokenPrecedent = mot.substring(0, i);
-        //         System.out.println("chara:"+c+"     subs:"+mot);
-        //         System.out.println(tokenPrecedent+"-3");
-        //         tokens.add(mot.substring(0, i));
+        // if(c == ';'){
+        // // System.out.println("XXXXX:" + mot.substring(0, i));
+        // tokenPrecedent = mot.substring(0, i);
+        // System.out.println("chara:"+c+" subs:"+mot);
+        // System.out.println(tokenPrecedent+"-3");
+        // tokens.add(mot.substring(0, i));
 
-        //         tokenPrecedent = mot.substring(i, i + 1);
-        //         System.out.println(tokenPrecedent+"-4");
-        //         tokens.add(mot.substring(i, i + 1));
+        // tokenPrecedent = mot.substring(i, i + 1);
+        // System.out.println(tokenPrecedent+"-4");
+        // tokens.add(mot.substring(i, i + 1));
 
-        //         // System.out.println("RESTE:" + mot.substring(i + 1, length));
-        //         // mot = mot.substring(i + 1, length);
-        //         // substring = mot;
-        //         // length = mot.length();
-        //         // i = -1;
+        // // System.out.println("RESTE:" + mot.substring(i + 1, length));
+        // // mot = mot.substring(i + 1, length);
+        // // substring = mot;
+        // // length = mot.length();
+        // // i = -1;
 
-
-        //     }
+        // }
         // }
         else if (tokenPrecedentCopy.getValue().equals("return")) {
-            if(c == ';'){
+            if (c == ';') {
                 // System.out.println("XXXXX:" + mot.substring(0, i));
-                tokenPrecedentCopy = new LexicalToken(null, mot.substring(0, i), -1);
-                // System.out.println("chara:"+c+"     subs:"+mot);
+                tokenPrecedentCopy = new LexicalToken(null, mot.substring(0, i), line);
+                // System.out.println("chara:"+c+" subs:"+mot);
                 // System.out.println(tokenPrecedent+"-3");
-                tokenList.add(new LexicalToken(null, mot.substring(0, i), -1) );
+                tokenList.add(new LexicalToken(null, mot.substring(0, i), line));
 
-                tokenPrecedentCopy = new LexicalToken(null,mot.substring(i, i + 1), -1);
+                tokenPrecedentCopy = new LexicalToken(null, mot.substring(i, i + 1), line);
                 // System.out.println(tokenPrecedent+"-4");
-                tokenList.add(new LexicalToken(null, mot.substring(i, i + 1), -1) );
-                cutted=true;
+                tokenList.add(new LexicalToken(null, mot.substring(i, i + 1), line));
+                cutted = true;
                 // System.out.println("RESTE:" + mot.substring(i + 1, length));
                 // mot = mot.substring(i + 1, length);
                 // substring = mot;
                 // length = mot.length();
                 // i = -1;
 
-
             }
-        }
-        else {
+        } else {
 
-            token = splitOneTokenCopy(mot);
+            token = splitOneTokenCopy(mot, line);
 
             if (token != null) {
-                tokenPrecedentCopy = new LexicalToken(null, token.getValue(), -1) ;
-                // System.out.println("chara:"+c+"     subs:"+mot);
+                tokenPrecedentCopy = new LexicalToken(null, token.getValue(), line);
+                // System.out.println("chara:"+c+" subs:"+mot);
 
                 // System.out.println(tokenPrecedent+"-5");
-                cutted=true;
+                cutted = true;
                 tokenList.add(token);
-   
-
-                
-
 
                 // mot = mot.substring(i + 1, length);
 
@@ -491,32 +571,49 @@ public class Lexer {
         }
         // if(fullWordSize-1== i)
 
-        if( cutted) return true;
+        if (cutted)
+            return true;
 
         return false;
     }
 
-
-
-
-
-
-    public static ArrayList<LexicalToken> cleanArray(ArrayList<LexicalToken> Tokens) {
+    public static ArrayList<LexicalToken> cleanArraySave(ArrayList<LexicalToken> Tokens) {
         ArrayList<LexicalToken> cleanArray = new ArrayList<LexicalToken>();
 
-        for(LexicalToken token : Tokens){
-            if (!token.getValue().isBlank()){
+        for (LexicalToken token : Tokens) {
+            if (!token.getValue().isBlank()) {
                 cleanArray.add(token);
             }
         }
         return cleanArray;
 
+    }
+    public static void cleanArray() {
+        ArrayList<LexicalToken> copie=new ArrayList<LexicalToken>();
 
-
-
+        for (LexicalToken token : tokenList) {
+            if (!token.getValue().isBlank()) {
+                copie.add(token);
+            }
+        }
+        tokenList=copie;
 
     }
 
+
+    public static void afficherHM(){
+        Set set =hm.entrySet();
+        Iterator i = set.iterator();
+      
+        // Display elements
+        while(i.hasNext()) {
+           Map.Entry me = (Map.Entry)i.next();
+           System.out.print("ligne: "+me.getKey() + ": ");
+           System.out.println("    /indentation :"+me.getValue());
+        }
+        System.out.println("nbLignes:"+Lexer.nbLignes);
+
+    }
 
     public static ArrayList<String> splitTokenSave(String mot, String tokenPrecedent) {
         ArrayList<String> keywords = Lexer.getKeyWords();
@@ -621,8 +718,6 @@ public class Lexer {
         return tokens;
     }
 
-
-
     public static ArrayList<String> getKeyWords() {
         ArrayList<String> keyWords = new ArrayList<String>();
         // keyWords.add("ghffghffgf");
@@ -658,15 +753,11 @@ public class Lexer {
         return keyWords;
     }
 
-
-
-
     public static ArrayList<LexicalToken> getMotsCopy(String lines) {
         int length = lines.length();
         ArrayList<LexicalToken> mots = new ArrayList<LexicalToken>();
-        LexicalToken mot = new LexicalToken(null, "",-1);
+        LexicalToken mot = new LexicalToken(null, "", numLigne);
         boolean firstSpace = true;
-
 
         // boolean finIndetation = false;
         int cptIndentation = 0;
@@ -691,30 +782,35 @@ public class Lexer {
                     c = lines.charAt(i);
                 }
                 hm.put(numLigne, cptIndentation);
-                numLigne++;
-
 
             }
-            if (c == ' ' || c == '\n') {
+            if (c == ' ') {
                 // System.out.println(mot);
                 if (firstSpace) {
                     if (!mot.getValue().isBlank()) {
                         mots.add(mot);
-                        mot=new LexicalToken(null, "",-1);
+                        mot = new LexicalToken(null, "", numLigne);
                         firstSpace = false;
                     }
+
                 }
+                // if (c=='\n')
+
             } else {
                 // finIndetation=true;
                 firstSpace = true;
-                mot.setValue(mot.getValue()+c);
+                mot.setValue(mot.getValue() + c);
             }
+
         }
         // System.out.println(mot);
         if (!mot.getValue().isBlank()) {
             mots.add(mot);
-            mot=new LexicalToken(null, "",-1);
+            mot = new LexicalToken(null, "", numLigne);
         }
+        if (!mots.isEmpty())
+            numLigne++;
+
         return mots;
     }
 
@@ -724,7 +820,6 @@ public class Lexer {
         String mot = "";
         boolean firstSpace = true;
 
-
         // boolean finIndetation = false;
         int cptIndentation = 0;
         char c;
@@ -749,7 +844,6 @@ public class Lexer {
                 }
                 hm.put(numLigne, cptIndentation);
                 numLigne++;
-
 
             }
             if (c == ' ' || c == '\n') {
