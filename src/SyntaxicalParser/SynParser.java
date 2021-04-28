@@ -37,14 +37,16 @@ public class SynParser {
             if (tokenVerification.getType().equals(Rp) || tokenVerification.getType().equals(Rb)) {
                 scope--;
             }
-            if (!Rp.equals(tokenVerification.getType())
-                    && !Rb.equals(tokenVerification.getType())) {
-                pileContenuValue.pushReadStack(scope, tokenVerification);
-                scope--;
+            pileContenuValue.pushReadStack(scope, tokenVerification);
+            if (i < token.size()-1) {
                 continue;
             }
 
-            unStack(AST, scope, pileContenuValue);
+            try {
+                unStack(AST, scope, pileContenuValue);
+            } catch (SyntaxError syntaxError) {
+                syntaxError.printStackTrace();
+            }
             pileContenuValue.clearReadStack(scope);
 
 
@@ -59,7 +61,11 @@ public class SynParser {
                 }*/
 
         }
-        unStack(AST, scope, pileContenuValue);
+        try {
+            unStack(AST, scope, pileContenuValue);
+        } catch (SyntaxError syntaxError) {
+            syntaxError.printStackTrace();
+        }
         System.out.println(pileContenuValue.getScopMap());
         AST.printNode(0);
         return AST;
@@ -68,11 +74,16 @@ public class SynParser {
     private static RootNode unStack(RootNode AST, int scope, SyntaxicStack pileContenuValue) throws SyntaxError {
         boolean parameters = false;
         boolean variable = false;
+        boolean body = false;
+
         //Si l'instruction commence par un type, on declare une variable ou fonction, sinon erreur ?
-        DeclarationFunctionNode nodeFunc;
+        DeclarationFunctionNode nodeFunc = new DeclarationFunctionNode();
+        BodyNode nodeBody = new BodyNode();
+
         LexicalToken basicToken = new LexicalToken();
         LexicalToken functionToken = new LexicalToken();
         LexicalToken delimiterToken = new LexicalToken();
+
         for (int j = 0; j < pileContenuValue.readStackSize(scope); j++) {
             LexicalToken currentToken = pileContenuValue.popReadStack(scope, j);
             //Ici on dépile !
@@ -81,7 +92,7 @@ public class SynParser {
                     basicToken.setToken(currentToken);
                     break;
                 case Word:
-                    if (basicToken.getType().equals(BasicType)) {
+                    if (BasicType.equals(basicToken.getType())) {
                         DeclarationVariableNode nodeDec = new DeclarationVariableNode();
                         nodeDec.setName(currentToken.getValue());
                         nodeDec.setType(basicToken.getValue());
@@ -89,7 +100,10 @@ public class SynParser {
                             variable = true;
                             nodeFunc.addParams(nodeDec);
                         }else{
-                            AST.addChild((Node) nodeDec);
+                            AST.addChild(nodeDec);
+                        }
+                        if(body){
+                            nodeBody.addIteration(nodeDec);
                         }
                         pileContenuValue.newVarDeclToken(scope, currentToken.getValue());
                     }
@@ -99,20 +113,22 @@ public class SynParser {
                     break;
                 case Lp:
                     //si le token actuel est une parenthèse et que celui qui précède est une fonction
-                    if(functionToken.getType() != null && functionToken.getType().equals(Function)){
+                    if(functionToken.getType() != null && Function.equals(functionToken.getType())){
                         scope = pileContenuValue.newScope();
                         parameters = true;
-                        nodeFunc = new DeclarationFunctionNode();
                         nodeFunc.setName(currentToken.getValue());
                         nodeFunc.setType(basicToken.getValue());
                     }
                     break;
                 case virgule:
-                    if(parameters && variable){
-                        variable = false;
-                        break;
-                    }else if (parameters && !variable){
-                        throw new SyntaxError(currentToken.getValue());
+                    if(parameters){
+                        if(variable){
+                            variable = false;
+                            break;
+                        }
+                        else{
+                            throw new SyntaxError(currentToken.getValue());
+                        }
                     }
                     break;
 
@@ -124,70 +140,18 @@ public class SynParser {
                     }
                     break;
                 case Lb:
-                    if(delimiterToken.getType() == Rp){
-
+                    if(Rp.equals(delimiterToken.getType())){
+                        scope = pileContenuValue.newScope();
+                        body = true;
                     }
-            }
-            if (currentToken.getType() == BasicType) {
-
-                //declarer une variable
-                System.out.println(pileContenuValue.popReadStack(scope, j).getValue());
-                if (Word.equals(pileContenuValue.popReadStack(scope, j + 1).getType())) {
-                    if (EoI.equals(pileContenuValue.popReadStack(scope, j + 2).getType()) ||
-                            Ope.equals(pileContenuValue.popReadStack(scope, j + 2).getType())) {
-
-
+                    else{
+                        throw new SyntaxError(currentToken.getValue());
                     }
-                    //Déclarer une fonction
-                } else if (Function.equals(pileContenuValue.popReadStack(scope, j + 1).getType())
-                        && Lp.equals(pileContenuValue.popReadStack(scope, j + 1).getType())) {
-
-                    for (int k = j; k < pileContenuValue.readStackSize(scope); k++) {
-                        if (")".equals(pileContenuValue.popReadStack(scope, k))) {
-                            break;
-                        }
-                        if (pileContenuValue.popReadStack(scope, j).getType() == BasicType) {
-                            DeclarationVariableNode argument = new DeclarationVariableNode();
-                            argument.setName(pileContenuValue.popReadStack(scope, k + 1).getValue());
-                            argument.setType(pileContenuValue.popReadStack(scope, k).getValue());
-                            nodeFunc.addParams(argument);
-                            System.out.println(argument);
-                        }
-                    }
-
-                    AST.addChild((Node) nodeFunc);
-                } else {
-                    // Try cath sans doute en trop mais osef un peu
-                    String msg = " Strange thing after an type";
-                    SyntaxError exName = new SyntaxError(msg);
-                    try {
-                        throw exName;
-                    } catch (SyntaxError syntaxError) {
-                        syntaxError.printStackTrace();
-                    }
-                }
+                    break;
+                case Rb:
+                    AST.addChild(nodeFunc);
             }
         }
         return AST;
-    }
-
-    public void getFunction(LexicalToken tokenFunction) {
-        tokenFunction
-        DeclarationFunctionNode function =
-                scope = tokenFunction.
-        DeclarationFunctionNode nodeFunc = new DeclarationFunctionNode();
-        nodeFunc.setName(token.getValue());
-        nodeFunc.setType(value.getValue());
-        //extraire les arguments/parametres
-        ArrayList<DeclarationVariableNode> parameters = getParameters();
-        //étudier le scope, I.E. tout ce qui est dans les accolades
-        ArrayList<BodyNode> body = getBody();
-        //vérifier la correspondance entre le type déclaré et le type retourné
-    }
-
-    private ArrayList<DeclarationVariableNode> getParameters(, int scope) {
-
-        scope = pileContenuValue.newScope();
-
     }
 }

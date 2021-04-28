@@ -63,8 +63,6 @@ public class Main {
         phrase.add(token19);
         phrase.add(token20);
         phrase.add(token21);
-        phrase.add(token22);
-        phrase.add(token23);
         phrase.add(token24);
         phrase.add(token25);
 
