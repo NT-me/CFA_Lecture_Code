@@ -13,13 +13,11 @@ public class Main {
         LexicalToken token2 = new LexicalToken(Word,"a");
         LexicalToken token3 = new LexicalToken(EoI,";");
 
-        LexicalToken token4 = new LexicalToken(BasicType,"char");
-        LexicalToken token5 = new LexicalToken(Word,"b");
-        LexicalToken token6 = new LexicalToken(EoI,";");
+        LexicalToken token4 = new LexicalToken(Word,"a");
+        LexicalToken token5 = new LexicalToken(Ope,"=");
+        LexicalToken token6 = new LexicalToken(Number,"0");
+        LexicalToken token7 = new LexicalToken(EoI,";");
 
-        LexicalToken token7 = new LexicalToken(BasicType,"bool");
-        LexicalToken token8 = new LexicalToken(Word,"c");
-        LexicalToken token9 = new LexicalToken(EoI,";");
 
         LexicalToken token10 = new LexicalToken(BasicType,"int");
         LexicalToken token11 = new LexicalToken(Function,"main");
@@ -31,24 +29,29 @@ public class Main {
         LexicalToken token17 = new LexicalToken(Word,"b");
         LexicalToken token18 = new LexicalToken(Rp,")");
         LexicalToken token19 = new LexicalToken(Lb,"{");
-        LexicalToken token20 = new LexicalToken(Keyword,"return");
-        LexicalToken token21 = new LexicalToken(Word,"a");
-        LexicalToken token22 = new LexicalToken(Ope,"+");
-        LexicalToken token23 = new LexicalToken(Word,"b");
-        LexicalToken token24 = new LexicalToken(EoI,";");
-        LexicalToken token25 = new LexicalToken(Rb,"}");
+        LexicalToken token20 = new LexicalToken(BasicType,"int");
+        LexicalToken token21 = new LexicalToken(Word,"c");
+        LexicalToken token22 = new LexicalToken(Ope,"=");
+        LexicalToken token23 = new LexicalToken(Word,"a");
+        LexicalToken token24 = new LexicalToken(Ope,"+");
+        LexicalToken token25 = new LexicalToken(Word,"b");
+        LexicalToken token26 = new LexicalToken(EoI,";");
+        LexicalToken token27 = new LexicalToken(Keyword,"return");
+        LexicalToken token28 = new LexicalToken(Word,"c");
+        LexicalToken token29 = new LexicalToken(EoI,";");
+        LexicalToken token30 = new LexicalToken(Rb,"}");
 
 
-    /*    phrase.add(token);
+        /*phrase.add(token);
         phrase.add(token2);
         phrase.add(token3);
 
         phrase.add(token4);
         phrase.add(token5);
         phrase.add(token6);
+        phrase.add(token7);*/
 
-        phrase.add(token7);
-        phrase.add(token8);
+        /*phrase.add(token8);
         phrase.add(token9);*/
 
         phrase.add(token10);
@@ -61,10 +64,18 @@ public class Main {
         phrase.add(token17);
         phrase.add(token18);
         phrase.add(token19);
-        //phrase.add(token20);
+        phrase.add(token20);
         phrase.add(token21);
+        phrase.add(token22);
+        phrase.add(token23);
         phrase.add(token24);
         phrase.add(token25);
+        phrase.add(token26);
+        phrase.add(token27);
+        phrase.add(token28);
+        phrase.add(token29);
+        phrase.add(token30);
+
 
         SynParser.parsing(phrase);
     }

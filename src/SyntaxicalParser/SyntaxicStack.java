@@ -1,4 +1,6 @@
 package SyntaxicalParser;
+import Tools.DeclarationFunctionNode;
+import Tools.DeclarationVariableNode;
 import Tools.LexicalToken;
 
 import java.util.*;
@@ -44,16 +46,20 @@ public class SyntaxicStack {
         return this.flags.get(nameFlag);
     }
 
+    public void clearFlag(String nameFlag){
+        this.flags.put(nameFlag, new LexicalToken());
+    }
+
     public SyntaxicStack(int deepestScope) {
         this.deepestScope = deepestScope;
         this.flags = new HashMap<String, LexicalToken>();
 
-        HashMap<String, ArrayList<String>>  currentLists = new HashMap<String, ArrayList<String>> ();
+        HashMap<String, ArrayList>  currentLists = new HashMap<String, ArrayList> ();
 
-        ArrayList<String> varDeclList = new ArrayList<String>();
+        ArrayList<DeclarationVariableNode> varDeclList = new ArrayList<DeclarationVariableNode>();
         currentLists.put("declaredVar", varDeclList);
 
-        ArrayList<String> funDeclList = new ArrayList<String>();
+        ArrayList<DeclarationFunctionNode> funDeclList = new ArrayList<DeclarationFunctionNode>();
         currentLists.put("declaredFun", funDeclList);
 
         ArrayList<String> readList = new ArrayList<String>();
@@ -73,35 +79,48 @@ public class SyntaxicStack {
     }
 
     // Ajoute une nouvelle déclaration de variable
-    public int newVarDeclToken(int scope, String token){
-        ArrayList<String> currentRS = (ArrayList<String>)this.scopMap.get(scope).get("declaredVar");
+    public int newVarDeclToken(int scope, DeclarationVariableNode token){
+        ArrayList<DeclarationVariableNode> currentRS = (ArrayList<DeclarationVariableNode>)this.scopMap.get(scope).get("declaredVar");
         currentRS.add(token);
         return scope;
     }
 
     // Ajoute une nouvelle déclaration de fonction
-    public int newFunDeclToken(int scope, String token){
-        ArrayList<String> currentRS = (ArrayList<String>)this.scopMap.get(scope).get("declaredFun");
+    public int newFunDeclToken(int scope, DeclarationFunctionNode token){
+        ArrayList<DeclarationFunctionNode> currentRS = (ArrayList<DeclarationFunctionNode>)this.scopMap.get(scope).get("declaredFun");
         currentRS.add(token);
         return scope;
     }
 
-    public boolean checkIfFunIsDecl(String foo){
-        ArrayList<String> allFunDecl = new ArrayList<String>();
+    public boolean checkIfFunIsDecl(DeclarationFunctionNode foo){
+        ArrayList<DeclarationFunctionNode> allFunDecl = new ArrayList<>();
         for(int i = 0; i<=this.deepestScope; i++){
-            allFunDecl.addAll((ArrayList<String>)this.scopMap.get(i).get("declaredFun"));
+            allFunDecl.addAll((ArrayList<DeclarationFunctionNode>)this.scopMap.get(i).get("declaredFun"));
         }
 
         return allFunDecl.contains(foo);
     }
 
-    public boolean checkIfVarIsDecl(String var){
-        ArrayList<String> allVarDecl = new ArrayList<String>();
+    public boolean checkIfVarIsDecl(DeclarationVariableNode var){
+        ArrayList<DeclarationVariableNode> allVarDecl = new ArrayList<>();
         for(int i = 0; i<=this.deepestScope; i++){
-            allVarDecl.addAll((ArrayList<String>)this.scopMap.get(i).get("declaredVar"));
+            allVarDecl.addAll((ArrayList<DeclarationVariableNode>)this.scopMap.get(i).get("declaredVar"));
         }
 
         return allVarDecl.contains(var);
+    }
+
+    public boolean checkTypeVar(String type){
+        ArrayList<DeclarationVariableNode> allVarDecl = new ArrayList<>();
+        for(int i = 0; i<=this.deepestScope; i++){
+            allVarDecl.addAll((ArrayList<DeclarationVariableNode>)this.scopMap.get(i).get("declaredVar"));
+        }
+        for(int j = 0; j<allVarDecl.size();j++){
+            if(type.equals(allVarDecl.get(j).getType())){
+                return true;
+            }
+        }
+        return false;
     }
 
     public LexicalToken popReadStack(int scope, int i){

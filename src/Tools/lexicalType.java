@@ -3,6 +3,7 @@ package Tools;
 public enum lexicalType {
     BasicType,
     Word,
+    Number,
     Function,
     EoI, //;
     virgule,
