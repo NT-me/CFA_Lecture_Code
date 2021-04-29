@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="Convention de nommage début">
+    <list default="true" id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Scoring/Scorer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Scoring/Scorer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +19,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="ratchet_syntaxical" />
+        <entry key="$PROJECT_DIR$" value="scoring" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -77,6 +76,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -126,7 +126,21 @@
       <option name="project" value="LOCAL" />
       <updated>1619537485536</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="merge scorer + lexer">
+      <created>1619705863995</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1619705863995</updated>
+    </task>
+    <task id="LOCAL-00007" summary="1st push">
+      <created>1619705890466</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1619705890466</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,6 +162,8 @@
     <MESSAGE value="Enum + Type update&#10;parsing declaration &amp; affectation variable" />
     <MESSAGE value="Lecture d'une seule instruction simple fait !" />
     <MESSAGE value="Convention de nommage début" />
-    <option name="LAST_COMMIT_MESSAGE" value="Convention de nommage début" />
+    <MESSAGE value="merge scorer + lexer" />
+    <MESSAGE value="1st push" />
+    <option name="LAST_COMMIT_MESSAGE" value="1st push" />
   </component>
 </project>
