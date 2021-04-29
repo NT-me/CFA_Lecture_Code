@@ -31,6 +31,12 @@ public class LexicalToken {
         this.value = value;
     }
 
+    public LexicalToken() {
+        this.type = null;
+        this.value ="";
+        this.line = -1;
+    }
+
     public LexicalToken(lexicalType type, String value, int line) {
         this.type = type;
         this.value = value;

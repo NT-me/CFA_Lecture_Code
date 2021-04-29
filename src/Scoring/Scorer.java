@@ -84,7 +84,7 @@ public class Scorer {
         ArrayList<String> retErrors = new ArrayList<>();
 
         String wrongIndentationLenght = "Your indendation line %d is not a multiple of %d it seem you used mix indentation style or weird tab length";
-        for (int line = 0; line < indentationIndex.size(); line++){
+        for (int line = 1; line < indentationIndex.size(); line++){
             if (indentationIndex.get(line) % TAB != 0){
                 retErrors.add(String.format(wrongIndentationLenght, line, TAB));
             }
@@ -94,6 +94,7 @@ public class Scorer {
         HashMap<Integer, Integer> indentGuide = new HashMap<Integer, Integer>();
         int indentChar = 0;
         for(LexicalToken token : lexicalsTokens){
+            System.out.println(token.getLine());
             if(token.getType().equals(lexicalType.Lb)){
                 indentGuide.put(token.getLine(), indentChar);
                 indentChar += TAB;
@@ -106,6 +107,8 @@ public class Scorer {
                 indentGuide.put(token.getLine(), indentChar);
             }
         }
+
+        System.out.println(indentGuide);
 
         String wrongIdent = "On the line %d you're indendation is bad, too much or not enough tab";
         for(Map.Entry<Integer, Integer> item : indentGuide.entrySet()){
