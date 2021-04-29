@@ -1,14 +1,15 @@
 package Tools;
 
-public class DeclarationNode extends Node{
+public class AffectationNode extends Node{
 
-    public String name;
-    public DeclarationNode(String type, String name) {
-        super(type);
+    private String name;
+
+    public AffectationNode(String name) {
+        super();
         this.name = name;
     }
 
-    public DeclarationNode() {
+    public AffectationNode() {
         super();
     }
 
@@ -19,6 +20,7 @@ public class DeclarationNode extends Node{
     public void setName(String name) {
         this.name = name;
     }
+
 
     @Override
     public void printNode(int depth){
