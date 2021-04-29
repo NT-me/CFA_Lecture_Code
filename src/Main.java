@@ -18,10 +18,10 @@ public class Main {
             System.out.println("ligne -->" +  token.getLine() + "<\n");
         }
         System.out.println("nb de tokens total:"+tokens.size()+"\n");
-        HashMap hm=Lexer.getHashMap(); // pour avoir la HashMap
-        Lexer.afficherHM();
-
-
+        HashMap hm=Lexer.getHashMap_indentation(); // pour avoir la HashMap
+        Lexer.afficherHM_Indentation();
+        Lexer.afficherHM_LastChar();
+        Lexer.afficherHM_LineLength();
 
 
     }

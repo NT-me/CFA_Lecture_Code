@@ -15,7 +15,13 @@ public class Lexer {
 
     public static LexicalToken tokenPrecedent = new LexicalToken(null, "", -1);
 
-    public static HashMap hm = new HashMap();
+    public static ArrayList<LexicalToken> mots = new ArrayList<LexicalToken>();
+
+    public static HashMap hm_indentation = new HashMap();
+    public static HashMap hm_LineLength = new HashMap();
+    public static HashMap hm_LastChar = new HashMap();
+
+
     public static ArrayList<LexicalToken> tokenList = new ArrayList<LexicalToken>();
     public static int numLigne = 0;
     public static int nbLignes;
@@ -87,17 +93,14 @@ public class Lexer {
             case ",":
                 token.setType(lexicalType.Coma);
                 break;
-
             case "return":
                 token.setType(lexicalType.Keyword);
                 break;
-
             default:
                 token.setType(lexicalType.Word);
             }
 
             if (prec != null) {
-
                 switch (prec.getValue()) {
                 case "int":
                     token.setType(lexicalType.Word);
@@ -109,19 +112,16 @@ public class Lexer {
             }
 
             if (suiv != null) {
-
                 switch (suiv.getValue()) {
                 case "(":
                     token.setType(lexicalType.Function);
                     break;
-
                 }
 
             }
 
             if (isNumeric(token.getValue())) {
                 token.setType(lexicalType.Number);
-
             }
 
         }
@@ -139,29 +139,77 @@ public class Lexer {
         return null;
     }
 
-    public static ArrayList<LexicalToken> fileToTokens(String file) throws IOException {
-        ArrayList<String> lines = readLines("./src/source.c");
+    public static void quoteChecker() {
 
-        ArrayList<LexicalToken> mots = new ArrayList<LexicalToken>();
+        String text = "";
+        int length = tokenList.size();
+        boolean debutQuote = false;
 
-        for (String line : lines) {
-            mots.addAll(cutLines(line));
+        ArrayList<LexicalToken> copie = new ArrayList<LexicalToken>();
+
+        for (int i = 0; i < length; i++) {
+
+            if (debutQuote) {
+                text += tokenList.get(i).getValue();
+                System.out.println("concat: " + text);
+
+            }else copie.add(tokenList.get(i));
+            if (tokenList.get(i).getType().equals(lexicalType.Quote)) {
+                if (debutQuote){
+                    copie.add(new LexicalToken(tokenList.get(i-1).getType(), text.substring(0,text.length()-1), tokenList.get(i).getLine()) );
+                    copie.add(new LexicalToken(lexicalType.Quote,"\"" , tokenList.get(i).getLine()) );
+
+                    debutQuote = false;
+                }
+                else {
+                    debutQuote = true;
+                    text = "";
+
+                }
+                System.out.println("QUOTE");
+
+            }
+            
 
         }
-        nbLignes = hm.size();
+
+        tokenList = copie;
+
+    }
+
+    public static ArrayList<LexicalToken> fileToTokens(String file) throws IOException {
+        ArrayList<String> lines = readLines("./src/source.c");
+        int cpt=0;
+
+        for (String line : lines) {
+            mots.addAll(cutLines(line,cpt));
+            cpt++;
+
+        }
+        nbLignes = hm_indentation.size();
 
         for (LexicalToken mot : mots) {
             analyzeSubstrings(mot);
+
         }
 
-        cleanArray();
+        cleanArray();   
         typage(tokenList);
+        quoteChecker();
         return tokenList;
 
     }
 
-    public static HashMap getHashMap() {
-        return hm;
+    public static HashMap getHashMap_indentation() {
+        return hm_indentation;
+    }
+
+    public static HashMap getHashMap_LineLength() {
+        return hm_LineLength;
+    }
+
+    public static HashMap getHashMap_LastChar() {
+        return hm_LastChar;
     }
 
     public static void analyzeSubstrings(LexicalToken lexicalToken) {
@@ -258,8 +306,8 @@ public class Lexer {
 
     }
 
-    public static void afficherHM() {
-        Set set = hm.entrySet();
+    public static void afficherHM_Indentation() {
+        Set set = hm_indentation.entrySet();
         Iterator i = set.iterator();
 
         // Display elements
@@ -268,8 +316,31 @@ public class Lexer {
             System.out.print("ligne: " + me.getKey() + ": ");
             System.out.println("    /indentation :" + me.getValue());
         }
-        System.out.println("nbLignes:" + Lexer.nbLignes);
+    }
 
+
+    public static void afficherHM_LineLength() {
+        Set set = hm_LineLength.entrySet();
+        Iterator i = set.iterator();
+
+        // Display elements
+        while (i.hasNext()) {
+            Map.Entry me = (Map.Entry) i.next();
+            System.out.print("ligne: " + me.getKey() + ": ");
+            System.out.println("    /longueur ligne :" + me.getValue());
+        }
+    }
+    
+    public static void afficherHM_LastChar() {
+        Set set = hm_LastChar.entrySet();
+        Iterator i = set.iterator();
+
+        // Display elements
+        while (i.hasNext()) {
+            Map.Entry me = (Map.Entry) i.next();
+            System.out.print("ligne: " + me.getKey() + ": ");
+            System.out.println("    /dernier caractère :" + me.getValue());
+        }
     }
 
     public static ArrayList<String> getKeyWords() {
@@ -302,7 +373,7 @@ public class Lexer {
         return keyWords;
     }
 
-    public static ArrayList<LexicalToken> cutLines(String lines) {
+    public static ArrayList<LexicalToken> cutLines(String lines, int cpt) {
         int length = lines.length();
         ArrayList<LexicalToken> mots = new ArrayList<LexicalToken>();
         LexicalToken mot = new LexicalToken(null, "", numLigne);
@@ -310,6 +381,7 @@ public class Lexer {
         int cptIndentation = 0;
         char c;
 
+        if(lines.isBlank())hm_indentation.put(cpt, 0);
         for (int i = 0; i < length - 1; i++) {
 
             c = lines.charAt(i);
@@ -322,7 +394,8 @@ public class Lexer {
 
                     c = lines.charAt(i);
                 }
-                hm.put(numLigne, cptIndentation);
+                hm_indentation.put(cpt, cptIndentation);
+
 
             }
             if (c == ' ') {
@@ -345,30 +418,38 @@ public class Lexer {
             mots.add(mot);
             mot = new LexicalToken(null, "", numLigne);
         }
-        if (!mots.isEmpty())
-            numLigne++;
+        // if (!mots.isEmpty())
+        //     numLigne++;
 
         return mots;
     }
 
     public static ArrayList<String> readLines(String file) throws IOException {
         ArrayList<String> lines = new ArrayList<String>();
+        char prec=' ';
+
         try (FileReader f = new FileReader(file)) {
             StringBuffer sb = new StringBuffer();
             while (f.ready()) {
                 char c = (char) f.read();
+
                 if (c != '\n') {
+                    prec = c;
 
                     sb.append(c);
 
                 } else {
                     lines.add(sb.toString());
+                    hm_LineLength.put(numLigne, sb.toString().length());
+                    if(sb.toString().length()>1 )hm_LastChar.put(numLigne, sb.toString().charAt(sb.toString().length()-2));
+                    else hm_LastChar.put(numLigne,'\n');
+                    numLigne++;
                     sb = new StringBuffer();
                 }
             }
             lines.add(sb.toString());
         }
-
+        numLigne=0;
         return lines;
     }
 }
