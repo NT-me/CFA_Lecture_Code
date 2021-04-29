@@ -94,7 +94,6 @@ public class Scorer {
         HashMap<Integer, Integer> indentGuide = new HashMap<Integer, Integer>();
         int indentChar = 0;
         for(LexicalToken token : lexicalsTokens){
-            System.out.println(token.getLine());
             if(token.getType().equals(lexicalType.Lb)){
                 indentGuide.put(token.getLine(), indentChar);
                 indentChar += TAB;
@@ -108,8 +107,6 @@ public class Scorer {
             }
         }
 
-        System.out.println(indentGuide);
-
         String wrongIdent = "On the line %d you're indendation is bad, too much or not enough tab";
         for(Map.Entry<Integer, Integer> item : indentGuide.entrySet()){
             if(!indentationIndex.get(item.getKey()).equals(item.getValue())){
@@ -120,7 +117,12 @@ public class Scorer {
         return retErrors;
     }
 
-    public static boolean notMore200Lines(HashMap<Integer, Integer> indentationIndex){
-        return indentationIndex.size() <= 200;
+    public static ArrayList<String> notMore200Lines(HashMap<Integer, Integer> indentationIndex){
+        ArrayList<String> retError = new ArrayList<>();
+        if(indentationIndex.size() > 200){
+            retError.add("Your file is too long ! More than 200 lines !");
+        }
+
+        return retError;
     }
 }
