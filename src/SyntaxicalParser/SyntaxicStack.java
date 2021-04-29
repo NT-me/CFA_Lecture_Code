@@ -6,14 +6,15 @@ import java.util.*;
 public class SyntaxicStack {
     private HashMap<Integer, HashMap> scopMap;
     private int deepestScope;
+    private HashMap<String, LexicalToken> flags;
 
     public HashMap getScopMap() {
         return scopMap;
     }
 
-    public void setScopMap(HashMap scopMap) {
+    /*public void setScopMap(HashMap scopMap) {
         this.scopMap = scopMap;
-    }
+    }*/
 
     public int getDeepestScope() {
         return deepestScope;
@@ -23,8 +24,29 @@ public class SyntaxicStack {
         this.deepestScope = deepestScope;
     }
 
+    public void setScopMap(HashMap<Integer, HashMap> scopMap) {
+        this.scopMap = scopMap;
+    }
+
+    public HashMap<String, LexicalToken> getFlags() {
+        return flags;
+    }
+
+    public void setFlags(HashMap<String, LexicalToken> flags) {
+        this.flags = flags;
+    }
+
+    public void addFlags(String name,LexicalToken flag){
+        this.flags.put(name,flag);
+    }
+
+    public LexicalToken getFlag(String nameFlag){
+        return this.flags.get(nameFlag);
+    }
+
     public SyntaxicStack(int deepestScope) {
         this.deepestScope = deepestScope;
+        this.flags = new HashMap<String, LexicalToken>();
 
         HashMap<String, ArrayList<String>>  currentLists = new HashMap<String, ArrayList<String>> ();
 

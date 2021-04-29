@@ -8,4 +8,15 @@ public class RootNode extends Node{
     public void addChild(Node nodeDec) {
         super.children.add(nodeDec);
     }
+
+    @Override
+    public void printNode(int depth){
+        String indentlvl = " ".repeat(depth);
+        System.out.println(indentlvl + this.type.toString() + " " + " " + this.children);
+
+        depth += 1;
+        for(Node n : this.children) {
+            n.printNode(depth);
+        }
+    }
 }

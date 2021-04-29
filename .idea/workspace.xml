@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="Parser syntaxique">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_04_2021_15_27__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_04_2021_15_27__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_04_2021_15_48__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_04_2021_15_48__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="fin de declaration function (il faut debbug)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SyntaxicalParser/SyntaxicStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SyntaxicalParser/SyntaxicStack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tools/BodyNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/BodyNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tools/IterationNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/DeclarationFunctionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/DeclarationFunctionNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/RootNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/RootNode.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +69,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -86,6 +97,7 @@
       <workItem from="1619436917187" duration="423000" />
       <workItem from="1619508558448" duration="28988000" />
       <workItem from="1619594716243" duration="2400000" />
+      <workItem from="1619680835448" duration="10979000" />
     </task>
     <task id="LOCAL-00001" summary="Enum + Type update&#10;parsing declaration &amp; affectation variable">
       <created>1619471929973</created>
@@ -136,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619611870267</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fin de declaration function (il faut debbug)">
+      <created>1619638904887</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1619638904887</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,17 +180,24 @@
     <MESSAGE value="Début de la pile syntaxique" />
     <MESSAGE value="Utilisation de la pile syntaxique" />
     <MESSAGE value="Parser syntaxique" />
-    <option name="LAST_COMMIT_MESSAGE" value="Parser syntaxique" />
+    <MESSAGE value="fin de declaration function (il faut debbug)" />
+    <option name="LAST_COMMIT_MESSAGE" value="fin de declaration function (il faut debbug)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java</url>
-          <line>28</line>
-          <option name="timeStamp" value="6" />
+          <line>91</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="pileContenuValue.scopMap.entrySet().toArray()[0]" />
+        <watch expression="((DeclarationVariableNode)nodeBody.children.get(0)).name" custom="Tools.DeclarationVariableNode" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
