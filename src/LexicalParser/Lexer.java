@@ -151,7 +151,7 @@ public class Lexer {
 
             if (debutQuote) {
                 text += tokenList.get(i).getValue();
-                System.out.println("concat: " + text);
+                // System.out.println("concat: " + text);
 
             }else copie.add(tokenList.get(i));
             if (tokenList.get(i).getType().equals(lexicalType.Quote)) {
@@ -166,7 +166,7 @@ public class Lexer {
                     text = "";
 
                 }
-                System.out.println("QUOTE");
+                // System.out.println("QUOTE");
 
             }
             
@@ -179,7 +179,7 @@ public class Lexer {
 
     public static ArrayList<LexicalToken> fileToTokens(String file) throws IOException {
         ArrayList<String> lines = readLines("./src/source.c");
-        int cpt=0;
+        int cpt=1;
 
         for (String line : lines) {
             mots.addAll(cutLines(line,cpt));
@@ -330,7 +330,7 @@ public class Lexer {
             System.out.println("    /longueur ligne :" + me.getValue());
         }
     }
-    
+
     public static void afficherHM_LastChar() {
         Set set = hm_LastChar.entrySet();
         Iterator i = set.iterator();
@@ -376,7 +376,7 @@ public class Lexer {
     public static ArrayList<LexicalToken> cutLines(String lines, int cpt) {
         int length = lines.length();
         ArrayList<LexicalToken> mots = new ArrayList<LexicalToken>();
-        LexicalToken mot = new LexicalToken(null, "", numLigne);
+        LexicalToken mot = new LexicalToken(null, "", cpt);
         boolean firstSpace = true;
         int cptIndentation = 0;
         char c;
@@ -402,7 +402,7 @@ public class Lexer {
                 if (firstSpace) {
                     if (!mot.getValue().isBlank()) {
                         mots.add(mot);
-                        mot = new LexicalToken(null, "", numLigne);
+                        mot = new LexicalToken(null, "", cpt);
                         firstSpace = false;
                     }
 
@@ -416,7 +416,7 @@ public class Lexer {
         }
         if (!mot.getValue().isBlank()) {
             mots.add(mot);
-            mot = new LexicalToken(null, "", numLigne);
+            mot = new LexicalToken(null, "", cpt);
         }
         // if (!mots.isEmpty())
         //     numLigne++;
@@ -440,9 +440,9 @@ public class Lexer {
 
                 } else {
                     lines.add(sb.toString());
-                    hm_LineLength.put(numLigne, sb.toString().length());
-                    if(sb.toString().length()>1 )hm_LastChar.put(numLigne, sb.toString().charAt(sb.toString().length()-2));
-                    else hm_LastChar.put(numLigne,'\n');
+                    hm_LineLength.put(numLigne+1, sb.toString().length());
+                    if(sb.toString().length()>1 )hm_LastChar.put(numLigne+1, sb.toString().charAt(sb.toString().length()-2));
+                    else hm_LastChar.put(numLigne+1,'\n');
                     numLigne++;
                     sb = new StringBuffer();
                 }
