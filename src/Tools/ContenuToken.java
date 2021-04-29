@@ -1,13 +1,5 @@
 package Tools;
 
-enum ContenuType{
-    typeInt,
-    typeFloat,
-    typeString,
-    typeBool,
-    typeList
-}
-
 public class ContenuToken {
     private ContenuType type;
     private String value;
@@ -15,6 +7,11 @@ public class ContenuToken {
     public ContenuToken(ContenuType type, String value) {
         this.type = type;
         this.value = value;
+    }
+
+    public ContenuToken() {
+        this.type = null;
+        this.value = "";
     }
 
     public ContenuType getType() {

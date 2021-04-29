@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Tools/ContenuToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="Convention de nommage début">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tools/SyntaxiqueToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/SyntaxiqueToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Scoring/Scorer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Scoring/Scorer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +25,7 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1rhdcL5Gu78dobmkrn4arkbDX7M" />
+  <component name="ProjectId" id="1rk86Y9DJifvGmaGZayMn8eATOB" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -39,13 +37,30 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="CFA_Lecture_Code" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="CFA_Lecture_Code" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -59,17 +74,59 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e66ebc11-1369-42f2-bcf7-46e17b8db77e" name="Default Changelist" comment="" />
+      <changelist id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="Enum + Type update&#10;parsing declaration &amp; affectation variable" />
       <created>1619432334360</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1619432334360</updated>
       <workItem from="1619436917187" duration="423000" />
+      <workItem from="1619508558448" duration="16322000" />
     </task>
+    <task id="LOCAL-00001" summary="Enum + Type update&#10;parsing declaration &amp; affectation variable">
+      <created>1619471929973</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1619471929973</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Lecture d'une seule instruction simple fait !">
+      <created>1619514515856</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1619514515856</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Lecture d'une seule instruction simple fait !">
+      <created>1619525145980</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1619525145980</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Convention de nommage début">
+      <created>1619537365690</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1619537365690</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Convention de nommage début">
+      <created>1619537485536</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1619537485536</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -86,5 +143,11 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Enum + Type update&#10;parsing declaration &amp; affectation variable" />
+    <MESSAGE value="Lecture d'une seule instruction simple fait !" />
+    <MESSAGE value="Convention de nommage début" />
+    <option name="LAST_COMMIT_MESSAGE" value="Convention de nommage début" />
   </component>
 </project>
