@@ -5,11 +5,18 @@ public enum lexicalType {
     Word,
     Function,
     EoI, //;
-    virgule,
-    Ope,
     Lp, //(
     Rp, //)
     Lb, //{
     Rb, //}
-    Keyword
-}
+    Keyword,
+    virgule,
+    Ope,
+    Quote,
+    Coma,
+    Number,
+
+    }
+
+
+

@@ -1,26 +1,22 @@
 package Tools;
 
+
 public class LexicalToken {
     private lexicalType type;
     private String value;
     private int line;
 
-    public LexicalToken(lexicalType type, String value, int line) {
-        this.type = type;
-        this.value = value;
-        this.line = line;
+
+    public lexicalType getType() {
+        return type;
     }
 
     public int getLine() {
         return line;
     }
 
-    public void setLine(int line) {
-        this.line = line;
-    }
-
-    public lexicalType getType() {
-        return type;
+    public void setLine(int numLigne) {
+        this.line = numLigne;
     }
 
     public void setType(lexicalType type) {
@@ -35,13 +31,9 @@ public class LexicalToken {
         this.value = value;
     }
 
-    public LexicalToken(lexicalType type, String value) {
+    public LexicalToken(lexicalType type, String value, int line) {
         this.type = type;
         this.value = value;
-    }
-
-    public LexicalToken() {
-        this.type = null;
-        this.value = "";
+        this.line = line;
     }
 }
