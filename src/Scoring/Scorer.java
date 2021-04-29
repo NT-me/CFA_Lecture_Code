@@ -15,8 +15,8 @@ public class Scorer {
     private static ArrayList<String> extractVarDeclarationsInList(Node ast){
         ArrayList<String> res = new ArrayList<>();
 
-        if (ast instanceof DeclarationNode){
-            DeclarationNode currentNode = (DeclarationNode) ast;
+        if (ast instanceof DeclarationVariableNode){
+            DeclarationVariableNode currentNode = (DeclarationVariableNode) ast;
             res.add(currentNode.getName());
         }
 
@@ -27,11 +27,11 @@ public class Scorer {
         return res;
     }
 
-/*    private static ArrayList<String> extractVarAffectationInList(Node ast){
+    private static ArrayList<String> extractVarAffectationInList(Node ast){
         ArrayList<String> res = new ArrayList<String>();
 
         if (ast instanceof AffectationNode){
-            DeclarationNode currentNode = (DeclarationNode) ast;
+            AffectationNode currentNode = (AffectationNode) ast;
             res.add(currentNode.getName());
         }
 
@@ -40,11 +40,22 @@ public class Scorer {
         }
 
         return res;
-    }*/
+    }
 
-/*    ArrayList<String> extractFunDeclarationsInList(Node ast){
+    ArrayList<String> extractFunDeclarationsInList(Node ast){
+        ArrayList<String> res = new ArrayList<>();
 
-    }*/
+        if (ast instanceof DeclarationFunctionNode){
+            DeclarationFunctionNode currentNode = (DeclarationFunctionNode) ast;
+            res.add(currentNode.getName());
+        }
+
+        for (Node n : ast.getChildren()){
+            res.addAll(extractVarDeclarationsInList(n));
+        }
+
+        return res;
+    }
 
     public static ArrayList<String> varNameConventions(Node ast){
         ArrayList<String> retErrors = new ArrayList<>();
@@ -67,18 +78,18 @@ public class Scorer {
         return retErrors;
     }
 
-/*    ArrayList<String> checkUsedDecl(Node ast){
+    public static ArrayList<String> checkUsedDecl(Node ast){
         ArrayList<String> varDeclList = extractVarDeclarationsInList(ast);
         ArrayList<String> varAffectList = extractVarAffectationInList(ast);
         ArrayList<String> retErrors = new ArrayList<String>();
-
+        String varNotUsedOrInit = "This variable : %s is not initialized or not used at all !";
         for (String word: varDeclList){
             if (!varAffectList.contains(word)){
-                retErrors.add(word);
+                retErrors.add(String.format(varNotUsedOrInit, word));
             }
         }
         return retErrors;
-    }*/
+    }
 
     public static ArrayList<String> checkIndentation(HashMap<Integer, Integer> indentationIndex, ArrayList<LexicalToken> lexicalsTokens){
         ArrayList<String> retErrors = new ArrayList<>();

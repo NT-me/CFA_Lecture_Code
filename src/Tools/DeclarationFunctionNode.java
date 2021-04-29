@@ -48,6 +48,15 @@ public class DeclarationFunctionNode extends Node{
         this.scope = scope;
     }
 
+    @Override
+    public ArrayList<Node> getChildren(){
+        ArrayList<Node> res = new ArrayList<>();
+        res.addAll(this.params);
+        res.add(this.body);
+
+        return res;
+    }
+
     public ArrayList<DeclarationVariableNode> getParams() {
         return params;
     }
