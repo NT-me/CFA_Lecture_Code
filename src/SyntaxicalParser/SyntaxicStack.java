@@ -110,13 +110,13 @@ public class SyntaxicStack {
         return allVarDecl.contains(var);
     }
 
-    public boolean checkTypeVar(String type){
+    public boolean checkTypeVar(String type, String name){
         ArrayList<DeclarationVariableNode> allVarDecl = new ArrayList<>();
         for(int i = 0; i<=this.deepestScope; i++){
             allVarDecl.addAll((ArrayList<DeclarationVariableNode>)this.scopMap.get(i).get("declaredVar"));
         }
         for(int j = 0; j<allVarDecl.size();j++){
-            if(type.equals(allVarDecl.get(j).getType())){
+            if(type.equals(allVarDecl.get(j).getType()) && name.equals(allVarDecl.get(j).getName())){
                 return true;
             }
         }

@@ -24,7 +24,7 @@ public class Main {
         LexicalToken token12 = new LexicalToken(Lp,"(");
         LexicalToken token13 = new LexicalToken(BasicType,"int");
         LexicalToken token14 = new LexicalToken(Word,"a");
-        LexicalToken token15 = new LexicalToken(virgule,",");
+        LexicalToken token15 = new LexicalToken(Coma,",");
         LexicalToken token16 = new LexicalToken(BasicType,"int");
         LexicalToken token17 = new LexicalToken(Word,"b");
         LexicalToken token18 = new LexicalToken(Rp,")");

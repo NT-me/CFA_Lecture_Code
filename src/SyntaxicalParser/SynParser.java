@@ -88,6 +88,7 @@ public class SynParser {
         boolean body = false;
         boolean isReturn = false;
         boolean addition = false;
+        boolean affectation = false;
 
         AffectationNode affecNode = new AffectationNode();
         OperationNode opeNode = new OperationNode();
@@ -123,21 +124,16 @@ public class SynParser {
                         pileContenuValue.newVarDeclToken(scope, nodeDec);
                     }
                     if (isReturn){
-                        if(!pileContenuValue.checkTypeVar(currentToken.getValue())){
+                        if(!pileContenuValue.checkTypeVar(nodeFunc.getType(),currentToken.getValue())){
                             throw new SyntaxError(currentToken.getValue());
                         }
                         isReturn = false;
                     }
                     if (addition){
-                        if(Number.equals(pileContenuValue.getFlag("previousToken")) ||
-                                Word.equals(pileContenuValue.getFlag("previousToken"))){
+                        if(Number.equals(pileContenuValue.getFlag("previousToken").getType()) ||
+                                Word.equals(pileContenuValue.getFlag("previousToken").getType())){
                             NumberNode number = new NumberNode(currentToken.getValue());
                             opeNode.addChild(number);
-                            if(body){
-                                nodeBody.addChild(opeNode);
-                            }else{
-                                AST.addChild(opeNode);
-                            }
                         }
                     }
                     pileContenuValue.getFlag("previousToken").setToken(currentToken);
@@ -157,7 +153,7 @@ public class SynParser {
                     }
 
                     break;
-                case virgule:
+                case Coma:
                     if(parameters){
                         if(variable){
                             variable = false;
@@ -205,6 +201,8 @@ public class SynParser {
                         case "=":
                             if(Word.equals(pileContenuValue.getFlag("previousToken").getType())){
                                 affecNode.setName(pileContenuValue.getFlag("previousToken").getValue());
+                                affectation = true;
+                                break;
                             }
                             pileContenuValue.getFlag("previousToken").setToken(currentToken);
                             break;
@@ -220,16 +218,42 @@ public class SynParser {
                                 throw new SyntaxError(currentToken.getValue());
                             }
 
+
+                    }
+                    break;
+                case EoI:
+                    if(addition){
+                        if(affectation){
+                            affectation = false;
+                            affecNode.addChild(opeNode);
+                            if(body){
+                                nodeBody.addChild(affecNode);
+                            }else{
+                                AST.addChild(affecNode);
+                            }
+                            addition = false;
+                            pileContenuValue.getFlag("previousToken").setToken(currentToken);
+                            break;
+                        }
+                        else if(body){
+                            nodeBody.addChild(opeNode);
+                        }else{
+                            AST.addChild(opeNode);
+                        }
+                        addition = false;
+                        pileContenuValue.getFlag("previousToken").setToken(currentToken);
+                        break;
                     }
 
-                case EoI:
+
                     pileContenuValue.getFlag("previousToken").setToken(currentToken);
                     break;
                 case Number:
-                    if ("=".equals(pileContenuValue.getFlag("previousToken").getValue())){
+                    if (affectation){
                         NumberNode number = new NumberNode();
                         number.setValue(currentToken.getValue());
                         affecNode.addChild(number);
+
                         if(scope == 0){
                             AST.addChild(affecNode);
                         }

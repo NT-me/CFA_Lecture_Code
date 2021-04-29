@@ -4,9 +4,10 @@ public enum lexicalType {
     BasicType,
     Word,
     Number,
+    Quote,
     Function,
     EoI, //;
-    virgule,
+    Coma,
     Ope,
     Lp, //(
     Rp, //)

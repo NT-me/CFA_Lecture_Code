@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="declaration de fonctions termine + affichage">
-      <change afterPath="$PROJECT_DIR$/src/Tools/AffectationNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tools/NumberNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tools/OperationNode.java" afterDir="false" />
+    <list default="true" id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="Parsing de tout les tokens basiques (il faut debug)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java" afterDir="false" />
@@ -98,7 +95,7 @@
       <workItem from="1619436917187" duration="423000" />
       <workItem from="1619508558448" duration="28988000" />
       <workItem from="1619594716243" duration="2400000" />
-      <workItem from="1619680835448" duration="25128000" />
+      <workItem from="1619680835448" duration="39347000" />
     </task>
     <task id="LOCAL-00001" summary="Enum + Type update&#10;parsing declaration &amp; affectation variable">
       <created>1619471929973</created>
@@ -163,7 +160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619692196612</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Parsing de tout les tokens basiques (il faut debug)">
+      <created>1619711440870</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1619711440870</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -190,22 +194,29 @@
     <MESSAGE value="Parser syntaxique" />
     <MESSAGE value="fin de declaration function (il faut debbug)" />
     <MESSAGE value="declaration de fonctions termine + affichage" />
-    <option name="LAST_COMMIT_MESSAGE" value="declaration de fonctions termine + affichage" />
+    <MESSAGE value="Parsing de tout les tokens basiques (il faut debug)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Parsing de tout les tokens basiques (il faut debug)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java</url>
-          <line>98</line>
+          <line>99</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Tools.BodyNode" memberName="children" />
+      </pinned-members>
+    </pin-to-top-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="pileContenuValue.scopMap.entrySet().toArray()[0]" />
         <watch expression="((DeclarationVariableNode)nodeBody.children.get(0)).name" custom="Tools.DeclarationVariableNode" />
+        <watch expression="AST.children.get(0)" />
       </configuration>
     </watches-manager>
   </component>
