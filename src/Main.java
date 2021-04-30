@@ -14,24 +14,20 @@ public class Main {
         ArrayList<LexicalToken> tokens=Lexer.fileToTokens("./src/source.c"); //récupere les tokens
         HashMap hm=Lexer.getHashMap_indentation(); // pour avoir la HashMap
 
-        ArrayList<String> retErrors = Scorer.checkIndentation(hm, tokens);
-
-        for (LexicalToken token : tokens) {
-            System.out.println("token -->" +  token.getValue() + "<");
-            System.out.println("type -->" +  token.getType() + "<");
-            System.out.println("ligne -->" +  token.getLine() + "<\n");
-        }
+        Scorer.addErrors(Scorer.checkIndentation(hm, tokens));
 
         Node AST = SynParser.parsing(tokens);
 
-        retErrors.addAll(Scorer.notMore200Lines(hm));
-        retErrors.addAll(Scorer.varNameConventions(AST));
-        retErrors.addAll(Scorer.checkUsedDecl(AST));
-        retErrors.addAll(Scorer.findOperationWithoutStore(AST));
-        retErrors.addAll(Scorer.checkLineLength(Lexer.getHashMap_LineLength()));
+        Scorer.addErrors(Scorer.notMore200Lines(hm));
+        Scorer.addErrors(Scorer.varNameConventions(AST));
+        Scorer.addErrors(Scorer.checkUsedDecl(AST));
+        Scorer.addErrors(Scorer.findOperationWithoutStore(AST));
+        Scorer.addErrors(Scorer.checkLineLength(Lexer.getHashMap_LineLength()));
 
-        for(String error : retErrors){
+        for(String error : Scorer.getAllErrors()){
             System.out.println(error);
         }
+
+        System.out.println(Scorer.getNote());
     }
 }

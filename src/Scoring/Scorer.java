@@ -10,7 +10,27 @@ import java.util.Map;
 
 
 public class Scorer {
-    final static int TAB = 8;
+    private final static int TAB = 8;
+    private static ArrayList<String> allErrors = new ArrayList<>();
+    private static double errorPoints = 0.0;
+    private static double denom = 0.0;
+
+    public static void addErrors(ArrayList<String> retErrors){
+        denom += 1;
+        if (!retErrors.isEmpty()){
+            errorPoints += 1;
+        }
+        allErrors.addAll(retErrors);
+    }
+
+    public static ArrayList<String> getAllErrors() {
+        return allErrors;
+    }
+
+    public static double getNote(){
+        double note = 10 - (errorPoints/denom)*10;
+        return note;
+    }
 
     private static ArrayList<String> extractVarDeclarationsInList(Node ast){
         ArrayList<String> res = new ArrayList<>();
