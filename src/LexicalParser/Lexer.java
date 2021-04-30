@@ -56,7 +56,6 @@ public class Lexer {
             case "(":
                 token.setType(lexicalType.Lp);
                 break;
-
             case ")":
                 token.setType(lexicalType.Rp);
                 break;
@@ -88,7 +87,7 @@ public class Lexer {
                 case "+":
                     token.setType(lexicalType.Ope);
                 break;
-                case ";":
+            case ";":
                 token.setType(lexicalType.EoI);
                 break;
             case ",":

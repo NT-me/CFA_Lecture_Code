@@ -1,4 +1,4 @@
 int main(int parama, int paramb){
-        int c = parama + 1;
+        int c = parama + paramb;
         return c;
 }

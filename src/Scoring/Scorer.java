@@ -139,6 +139,7 @@ public class Scorer {
         HashMap<Integer, Integer> indentGuide = new HashMap<Integer, Integer>();
         int indentChar = 0;
         for(LexicalToken token : lexicalsTokens){
+            //System.out.println(token.getType() + " " + token.getValue());
             if(token.getType().equals(lexicalType.Lb)){
                 indentGuide.put(token.getLine(), indentChar);
                 indentChar += TAB;
