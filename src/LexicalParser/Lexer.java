@@ -418,12 +418,18 @@ public class Lexer {
             }
 
         }
+    
+
+
         if (!mot.getValue().isBlank()) {
+            c = lines.charAt(length-1);
+            mot.setValue(mot.getValue() + c);
             mots.add(mot);
             mot = new LexicalToken(null, "", cpt);
         }
         // if (!mots.isEmpty())
         //     numLigne++;
+
 
         return mots;
     }
@@ -452,7 +458,10 @@ public class Lexer {
                 }
             }
             lines.add(sb.toString());
+            hm_LineLength.put(numLigne+1, sb.toString().length());
+            hm_LastChar.put(numLigne+1,sb.toString().charAt(sb.toString().length()-1));
         }
+        
         numLigne=0;
         return lines;
     }
