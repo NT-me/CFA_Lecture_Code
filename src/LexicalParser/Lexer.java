@@ -75,6 +75,10 @@ public class Lexer {
             case "if":
                 token.setType(lexicalType.Keyword);
                 break;
+
+            case "+":
+                token.setType(lexicalType.Ope);
+                break;
             case "\"":
                 token.setType(lexicalType.Quote);
                 break;
