@@ -110,6 +110,19 @@ public class SyntaxicStack {
         return allVarDecl.contains(var);
     }
 
+    public ArrayList<DeclarationVariableNode> getDeclarationVariableNodesFromName(String name){
+        ArrayList<DeclarationVariableNode> res = new ArrayList<>();
+
+        for(int i = 0; i<=this.deepestScope; i++){
+            for (DeclarationVariableNode dvn : (ArrayList<DeclarationVariableNode>)this.scopMap.get(i).get("declaredVar")){
+                if(name.equals(dvn.getName())){
+                    res.add(dvn);
+                }
+            }
+        }
+        return res;
+    }
+
     public boolean checkTypeVar(String type, String name){
         ArrayList<DeclarationVariableNode> allVarDecl = new ArrayList<>();
         for(int i = 0; i<=this.deepestScope; i++){

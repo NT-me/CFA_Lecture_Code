@@ -1,4 +1,4 @@
 int main(int parama, int paramb){
-        int resc = a + b;
-        return resc;
+        int c = parama + 1;
+        return c;
 }

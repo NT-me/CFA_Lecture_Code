@@ -22,6 +22,8 @@ public class Main {
         retErrors.addAll(Scorer.notMore200Lines(hm));
         retErrors.addAll(Scorer.varNameConventions(AST));
         retErrors.addAll(Scorer.checkUsedDecl(AST));
+        retErrors.addAll(Scorer.findOperationWithoutStore(AST));
+        retErrors.addAll(Scorer.checkLineLength(Lexer.getHashMap_LineLength()));
 
         for(String error : retErrors){
             System.out.println(error);

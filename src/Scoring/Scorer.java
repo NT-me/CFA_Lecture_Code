@@ -21,7 +21,9 @@ public class Scorer {
         }
 
         for (Node n : ast.getChildren()){
-            res.addAll(extractVarDeclarationsInList(n));
+            if (!(n instanceof VarNode)){
+                res.addAll(extractVarDeclarationsInList(n));
+            }
         }
 
         return res;
@@ -36,7 +38,28 @@ public class Scorer {
         }
 
         for (Node n : ast.getChildren()){
-            res.addAll(extractVarAffectationInList(n));
+            if (!(n instanceof VarNode)){
+                res.addAll(extractVarDeclarationsInList(n));
+            }
+        }
+
+        return res;
+    }
+
+    public static ArrayList<String> findOperationWithoutStore(Node ast){
+        ArrayList<String> res = new ArrayList<>();
+
+        String operationNotStored = "This operation : %s %s %s is not stored after the calculation";
+        if (ast instanceof OperationNode){
+            if(!(ast.getParent() instanceof AffectationNode)){
+                res.add(String.format(operationNotStored, ast.getChildren().get(0).toString(), ast.getType(), ast.getChildren().get(1)));
+            }
+        }
+
+        for (Node n : ast.getChildren()){
+            if (!(n instanceof VarNode)){
+                res.addAll(findOperationWithoutStore(n));
+            }
         }
 
         return res;
@@ -55,6 +78,17 @@ public class Scorer {
         }
 
         return res;
+    }
+
+    public static ArrayList<String> checkLineLength(HashMap<Integer, Integer> lenghtLine){
+        ArrayList<String> retErrors = new ArrayList<>();
+        String tooLongLine = "This line : %d is too long (>80 characters)";
+        for(Map.Entry<Integer, Integer> item : lenghtLine.entrySet()){
+            if(lenghtLine.get(item.getKey()) > 80){
+                retErrors.add(String.format(tooLongLine, item.getKey()));
+            }
+        }
+        return retErrors;
     }
 
     public static ArrayList<String> varNameConventions(Node ast){

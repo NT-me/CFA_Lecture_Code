@@ -132,8 +132,10 @@ public class SynParser {
                     if (addition){
                         if(Number.equals(pileContenuValue.getFlag("previousToken").getType()) ||
                                 Word.equals(pileContenuValue.getFlag("previousToken").getType())){
-                            NumberNode number = new NumberNode(currentToken.getValue());
-                            opeNode.addChild(number);
+                            //VarNode number = new VarNode(currentToken.getValue());
+                            VarNode var = new VarNode(currentToken.getType().toString(),
+                                    currentToken.getValue());
+                            opeNode.addChild(var);
                         }
                     }
                     pileContenuValue.getFlag("previousToken").setToken(currentToken);
@@ -207,7 +209,39 @@ public class SynParser {
                             pileContenuValue.getFlag("previousToken").setToken(currentToken);
                             break;
                         case "+":
-                            if(Word.equals(pileContenuValue.getFlag("previousToken").getType()) ||
+                            addition = true;
+                            switch (pileContenuValue.getFlag("previousToken").getType()){
+                                case Word:
+                                    ArrayList<DeclarationVariableNode> varDeclNodeWithThisName =
+                                            pileContenuValue.getDeclarationVariableNodesFromName(
+                                                    pileContenuValue.getFlag("previousToken").getValue()
+                                            );
+                                    if (varDeclNodeWithThisName.size()>0){
+                                        VarNode var = new VarNode(pileContenuValue.getFlag("previousToken").getType().toString(),
+                                                pileContenuValue.getFlag("previousToken").getValue());
+                                        opeNode.setType("+");
+                                        opeNode.addChild(var);
+                                    }
+                                    else{
+                                        throw new SyntaxError(currentToken.getValue());
+                                    }
+
+                                    break;
+
+                                case Number:
+                                    NumberNode number = new NumberNode(pileContenuValue.getFlag("previousToken").getValue());
+                                    opeNode.setType("+");
+                                    opeNode.addChild(number);
+                                    break;
+
+                                default:
+                                    throw new SyntaxError(currentToken.getValue());
+
+                            }
+
+
+
+/*                            if(Word.equals(pileContenuValue.getFlag("previousToken").getType()) ||
                                     Number.equals(pileContenuValue.getFlag("previousToken").getType())) {
                                 addition = true;
                                 NumberNode number = new NumberNode(pileContenuValue.getFlag("previousToken").getValue());
@@ -216,9 +250,7 @@ public class SynParser {
                                 break;
                             }else{
                                 throw new SyntaxError(currentToken.getValue());
-                            }
-
-
+                            }*/
                     }
                     break;
                 case EoI:
