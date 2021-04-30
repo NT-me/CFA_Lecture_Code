@@ -16,6 +16,12 @@ public class Main {
 
         ArrayList<String> retErrors = Scorer.checkIndentation(hm, tokens);
 
+        for (LexicalToken token : tokens) {
+            System.out.println("token -->" +  token.getValue() + "<");
+            System.out.println("type -->" +  token.getType() + "<");
+            System.out.println("ligne -->" +  token.getLine() + "<\n");
+        }
+
         Node AST = SynParser.parsing(tokens);
 
         retErrors.addAll(Scorer.notMore200Lines(hm));

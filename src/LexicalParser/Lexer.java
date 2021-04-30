@@ -458,9 +458,11 @@ public class Lexer {
             }
             lines.add(sb.toString());
             hm_LineLength.put(numLigne+1, sb.toString().length());
-            hm_LastChar.put(numLigne+1,sb.toString().charAt(sb.toString().length()-1));
+            if (sb.toString().length() < 0){
+                hm_LastChar.put(numLigne+1,sb.toString().charAt(sb.toString().length()-1));
+            }
         }
-        
+
         numLigne=0;
         return lines;
     }
