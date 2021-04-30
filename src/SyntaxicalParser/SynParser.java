@@ -49,7 +49,7 @@ public class SynParser {
             }
             else if (tokenVerification.getType().equals(Rp) || tokenVerification.getType().equals(Rb)) {
                 pileContenuValue.pushReadStack(scope, tokenVerification);
-                scope--;
+                scope = tokenVerification.getType().equals(Rp) ? scope - 1 : scope - 2;
                 if (i < token.size()-1) {
                     continue;
                 }
@@ -76,8 +76,8 @@ public class SynParser {
 
 
         }
-        System.out.println(pileContenuValue.getScopMap());
-        AST.printNode(0);
+        //System.out.println(pileContenuValue.getScopMap());
+        //AST.printNode(0);
         return AST;
     }
 
@@ -98,8 +98,9 @@ public class SynParser {
 
 
         for (int j = 0; j < currentScope; j++) {
+        //while(pileContenuValue.readStackSize(scope) > 0){
             LexicalToken currentToken = pileContenuValue.popReadStack(scope, j);
-            System.out.println(currentToken.getType() + " " + scope);
+            //System.out.println(currentToken.getType() + " " + scope);
             //Ici on dépile !
             switch (currentToken.getType()) {
                 case BasicType:
