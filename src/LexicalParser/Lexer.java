@@ -192,6 +192,7 @@ public class Lexer {
         }
         nbLignes = hm_indentation.size();
 
+        cpt=1;
         for (LexicalToken mot : mots) {
             analyzeSubstrings(mot);
 
@@ -386,6 +387,8 @@ public class Lexer {
         char c;
 
         if(lines.isBlank())hm_indentation.put(cpt, 0);
+
+
         for (int i = 0; i < length - 1; i++) {
 
             c = lines.charAt(i);
@@ -421,12 +424,28 @@ public class Lexer {
     
 
 
+
         if (!mot.getValue().isBlank()) {
             c = lines.charAt(length-1);
             mot.setValue(mot.getValue() + c);
             mots.add(mot);
             mot = new LexicalToken(null, "", cpt);
         }
+
+        if(length==1){
+            hm_indentation.put(cpt, 0);
+
+            c= lines.charAt(0);
+            mot.setValue(mot.getValue() + c);
+
+            if (!mot.getValue().isBlank()){
+                mots.add(mot);
+                mot = new LexicalToken(null, "", cpt);
+
+
+            }
+        }
+
         // if (!mots.isEmpty())
         //     numLigne++;
 
@@ -459,7 +478,8 @@ public class Lexer {
             }
             lines.add(sb.toString());
             hm_LineLength.put(numLigne+1, sb.toString().length());
-            hm_LastChar.put(numLigne+1,sb.toString().charAt(sb.toString().length()-1));
+            if(sb.toString().length() > 0)hm_LastChar.put(numLigne+1,sb.toString().charAt(sb.toString().length()-1));
+            else hm_LastChar.put(numLigne+1,null);
         }
         
         numLigne=0;
