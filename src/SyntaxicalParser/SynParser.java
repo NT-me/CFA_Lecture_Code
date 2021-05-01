@@ -63,8 +63,9 @@ public class SynParser {
             try {
                 DeclarationFunctionNode nodeFunc = new DeclarationFunctionNode();
                 BodyNode nodeBody = new BodyNode();
+                NumberNode nodeNumber = new NumberNode();
                 for(int currentscope = 0; currentscope <= pileContenuValue.getDeepestScope();currentscope++){
-                    unStack(AST, currentscope, pileContenuValue, nodeFunc, nodeBody);
+                    unStack(AST, currentscope, pileContenuValue, nodeFunc, nodeBody, nodeNumber);
                     pileContenuValue.clearReadStack(currentscope);
                 }
 
@@ -77,12 +78,12 @@ public class SynParser {
 
         }
         //System.out.println(pileContenuValue.getScopMap());
-        //AST.printNode(0);
+        AST.printNode(0);
         return AST;
     }
 
-    private static RootNode unStack(RootNode AST, int scope, SyntaxicStack pileContenuValue,
-                                    DeclarationFunctionNode nodeFunc, BodyNode nodeBody) throws SyntaxError {
+    private static RootNode unStack(RootNode AST, int scope, SyntaxicStack pileContenuValue, DeclarationFunctionNode nodeFunc,
+                                    BodyNode nodeBody, NumberNode nodeNumber) throws SyntaxError {
         boolean parameters = false;
         boolean variable = false;
         boolean body = false;
@@ -230,69 +231,59 @@ public class SynParser {
                                     break;
 
                                 case Number:
-                                    NumberNode number = new NumberNode(pileContenuValue.getFlag("previousToken").getValue());
                                     opeNode.setType("+");
-                                    opeNode.addChild(number);
+                                    opeNode.addChild(nodeNumber);
+                                    nodeNumber = new NumberNode();
                                     break;
 
                                 default:
                                     throw new SyntaxError(currentToken.getValue());
 
                             }
-
-
-
-/*                            if(Word.equals(pileContenuValue.getFlag("previousToken").getType()) ||
-                                    Number.equals(pileContenuValue.getFlag("previousToken").getType())) {
-                                addition = true;
-                                NumberNode number = new NumberNode(pileContenuValue.getFlag("previousToken").getValue());
-                                opeNode.setType("+");
-                                opeNode.addChild(number);
-                                break;
-                            }else{
-                                throw new SyntaxError(currentToken.getValue());
-                            }*/
                     }
                     break;
                 case EoI:
-                    if(addition){
-                        if(affectation){
-                            affectation = false;
-                            affecNode.addChild(opeNode);
-                            if(body){
-                                nodeBody.addChild(affecNode);
-                            }else{
-                                AST.addChild(affecNode);
-                            }
-                            addition = false;
-                            pileContenuValue.getFlag("previousToken").setToken(currentToken);
-                            break;
+                    if(addition && affectation){
+                        affecNode.addChild(opeNode);
+                        if(body){
+                            nodeBody.addChild(affecNode);
+                        }else{
+                            AST.addChild(affecNode);
                         }
-                        else if(body){
+                    }
+                    if(addition && !affectation){
+                        if(body){
+                            if(nodeNumber.getValue() != ""){
+                                opeNode.addChild(nodeNumber);
+                            }
                             nodeBody.addChild(opeNode);
                         }else{
                             AST.addChild(opeNode);
                         }
-                        addition = false;
-                        pileContenuValue.getFlag("previousToken").setToken(currentToken);
-                        break;
+                    }
+                    if (!addition && affectation){
+                        if(body){
+                            affecNode.addChild(nodeNumber);
+                            nodeBody.addChild(affecNode);
+                        }else{
+                            AST.addChild(affecNode);
+                        }
                     }
 
-
+                    addition = false;
+                    affectation = false;
+                    affecNode = new AffectationNode();
+                    opeNode = new OperationNode();
+                    nodeNumber = new NumberNode();
                     pileContenuValue.getFlag("previousToken").setToken(currentToken);
                     break;
                 case Number:
+                    nodeNumber.setValue(currentToken.getValue());
                     if (affectation){
-                        NumberNode number = new NumberNode();
-                        number.setValue(currentToken.getValue());
-                        affecNode.addChild(number);
+                        if(addition) {
+                            opeNode.addChild(nodeNumber);
+                        }
 
-                        if(scope == 0){
-                            AST.addChild(affecNode);
-                        }
-                        else{
-                            nodeBody.addChild(affecNode);
-                        }
                     }
                     pileContenuValue.getFlag("previousToken").setToken(currentToken);
                     break;

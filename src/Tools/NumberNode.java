@@ -10,6 +10,7 @@ public class NumberNode extends Node{
 
     public NumberNode() {
         super();
+        this.value = "";
     }
 
     public String getValue() {
