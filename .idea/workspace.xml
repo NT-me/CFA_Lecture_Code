@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Tools/ContenuToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="Debug des cas de base">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tools/SyntaxiqueToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/SyntaxiqueToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SyntaxicalParser/SyntaxicStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SyntaxicalParser/SyntaxicStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/AffectationNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/AffectationNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/BodyNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/BodyNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/DeclarationFunctionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/DeclarationFunctionNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/DeclarationVariableNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/DeclarationVariableNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/NumberNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/NumberNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/RootNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/RootNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/lexicalType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/lexicalType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,18 +23,22 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Kotlin File" />
       </list>
     </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/Oleg_Tokenization" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="ratchet_syntaxical" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1rhdcL5Gu78dobmkrn4arkbDX7M" />
+  <component name="ProjectId" id="1rk86Y9DJifvGmaGZayMn8eATOB" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -39,13 +50,30 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="CFA_Lecture_Code" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="CFA_Lecture_Code" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -59,17 +87,126 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e66ebc11-1369-42f2-bcf7-46e17b8db77e" name="Default Changelist" comment="" />
+      <changelist id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="Enum + Type update&#10;parsing declaration &amp; affectation variable" />
       <created>1619432334360</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1619432334360</updated>
       <workItem from="1619436917187" duration="423000" />
+      <workItem from="1619508558448" duration="16322000" />
+      <workItem from="1619737098260" duration="5451000" />
+      <workItem from="1619768954812" duration="7330000" />
+      <workItem from="1619951345119" duration="2149000" />
     </task>
+    <task id="LOCAL-00001" summary="Enum + Type update&#10;parsing declaration &amp; affectation variable">
+      <created>1619471929973</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1619471929973</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Lecture d'une seule instruction simple fait !">
+      <created>1619514515856</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1619514515856</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Lecture d'une seule instruction simple fait !">
+      <created>1619525145980</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1619525145980</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Convention de nommage début">
+      <created>1619537365690</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1619537365690</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Convention de nommage début">
+      <created>1619537485536</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1619537485536</updated>
+    </task>
+    <task id="LOCAL-00006" summary="merge scorer + lexer">
+      <created>1619705863995</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1619705863995</updated>
+    </task>
+    <task id="LOCAL-00007" summary="1st push">
+      <created>1619705890466</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1619705890466</updated>
+    </task>
+    <task id="LOCAL-00008" summary="osef">
+      <created>1619734020365</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1619734020365</updated>
+    </task>
+    <task id="LOCAL-00009" summary="merge final --&gt; :+1:">
+      <created>1619736988913</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1619736988913</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Diverses avancées sur le socrer et le syntaxer">
+      <created>1619743000467</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1619743000468</updated>
+    </task>
+    <task id="LOCAL-00011" summary="midifications de la nuit">
+      <created>1619770230076</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1619770230076</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Différents bugs corrigés ou pas trop ;)">
+      <created>1619773912091</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1619773912091</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fix dernière ligne fixer (obligée qu'elle soit vide)">
+      <created>1619774531471</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1619774531471</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Debug des cas de base">
+      <created>1619877022190</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1619877022190</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -86,5 +223,46 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Enum + Type update&#10;parsing declaration &amp; affectation variable" />
+    <MESSAGE value="Lecture d'une seule instruction simple fait !" />
+    <MESSAGE value="Convention de nommage début" />
+    <MESSAGE value="merge scorer + lexer" />
+    <MESSAGE value="1st push" />
+    <MESSAGE value="osef" />
+    <MESSAGE value="merge final --&gt; :+1:" />
+    <MESSAGE value="Diverses avancées sur le socrer et le syntaxer" />
+    <MESSAGE value="midifications de la nuit" />
+    <MESSAGE value="Différents bugs corrigés ou pas trop ;)" />
+    <MESSAGE value="fix dernière ligne fixer (obligée qu'elle soit vide)" />
+    <MESSAGE value="Debug des cas de base" />
+    <option name="LAST_COMMIT_MESSAGE" value="Debug des cas de base" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java</url>
+          <line>75</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java</url>
+          <line>98</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Tools.BodyNode" memberName="children" />
+        <PinnedItemInfo parentTag="Tools.AffectationNode" memberName="children" />
+        <PinnedItemInfo parentTag="Tools.RootNode" memberName="children" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/CFA_Lecture_Code$Main.ic" NAME="Main Coverage Results" MODIFIED="1619874438711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

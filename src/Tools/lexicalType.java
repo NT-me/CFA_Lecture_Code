@@ -10,13 +10,8 @@ public enum lexicalType {
     Lb, //{
     Rb, //}
     Keyword,
-    virgule,
     Ope,
     Quote,
     Coma,
-    Number,
-
-    }
-
-
-
+    Number
+}

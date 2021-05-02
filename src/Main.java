@@ -1,28 +1,33 @@
 import LexicalParser.*;
 import Tools.LexicalToken;
-
+import SyntaxicalParser.SynParser;
 import java.util.ArrayList;
 import java.util.HashMap;
+import Scoring.Scorer;
+import Tools.Node;
+import Tools.RootNode;
 
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, Worldddddd!");
-
         ArrayList<LexicalToken> tokens=Lexer.fileToTokens("./src/source.c"); //récupere les tokens
-        
-        for (LexicalToken token : tokens) {
-            System.out.println("token -->" +  token.getValue() + "<");
-            System.out.println("type -->" +  token.getType() + "<");
-            System.out.println("ligne -->" +  token.getLine() + "<\n");
-        }
-        System.out.println("nb de tokens total:"+tokens.size()+"\n");
         HashMap hm=Lexer.getHashMap_indentation(); // pour avoir la HashMap
-        Lexer.afficherHM_Indentation();
-        Lexer.afficherHM_LastChar();
-        Lexer.afficherHM_LineLength();
 
+        Scorer.addErrors(Scorer.checkIndentation(hm, tokens));
 
+        Node AST = SynParser.parsing(tokens);
+
+        Scorer.addErrors(Scorer.notMore200Lines(hm));
+        Scorer.addErrors(Scorer.varNameConventions(AST));
+        Scorer.addErrors(Scorer.checkUsedDecl(AST));
+        Scorer.addErrors(Scorer.findOperationWithoutStore(AST));
+        Scorer.addErrors(Scorer.checkLineLength(Lexer.getHashMap_LineLength()));
+
+        for(String error : Scorer.getAllErrors()){
+            System.out.println(error);
+        }
+
+        System.out.println(Scorer.getNote());
     }
 }

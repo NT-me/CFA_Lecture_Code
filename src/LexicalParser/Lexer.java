@@ -56,7 +56,6 @@ public class Lexer {
             case "(":
                 token.setType(lexicalType.Lp);
                 break;
-
             case ")":
                 token.setType(lexicalType.Rp);
                 break;
@@ -480,8 +479,9 @@ public class Lexer {
             hm_LineLength.put(numLigne+1, sb.toString().length());
             if(sb.toString().length() > 0)hm_LastChar.put(numLigne+1,sb.toString().charAt(sb.toString().length()-1));
             else hm_LastChar.put(numLigne+1,null);
+
         }
-        
+
         numLigne=0;
         return lines;
     }
