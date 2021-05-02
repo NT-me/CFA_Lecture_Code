@@ -13,6 +13,5 @@ public enum lexicalType {
     Ope,
     Quote,
     Coma,
-    Number,
-
-    }
+    Number
+}

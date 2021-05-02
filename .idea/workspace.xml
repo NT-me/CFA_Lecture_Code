@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="Parsing de tout les tokens basiques (debug fait)">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_04_2021_15_27__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_04_2021_15_27__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_04_2021_15_48__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_04_2021_15_48__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="ba595f5e-d671-4279-bae8-ffd078b15d60" name="Default Changelist" comment="Debug des cas de base">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SyntaxicalParser/SyntaxicStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SyntaxicalParser/SyntaxicStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/AffectationNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/AffectationNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/BodyNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/BodyNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/DeclarationFunctionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/DeclarationFunctionNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/DeclarationVariableNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/DeclarationVariableNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/Node.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tools/NumberNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/NumberNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/source.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/source.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/RootNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/RootNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tools/lexicalType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools/lexicalType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,13 +74,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -99,6 +106,7 @@
       <workItem from="1619508558448" duration="16322000" />
       <workItem from="1619737098260" duration="5451000" />
       <workItem from="1619768954812" duration="7330000" />
+      <workItem from="1619951345119" duration="2149000" />
     </task>
     <task id="LOCAL-00001" summary="Enum + Type update&#10;parsing declaration &amp; affectation variable">
       <created>1619471929973</created>
@@ -191,7 +199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619774531471</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Debug des cas de base">
+      <created>1619877022190</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1619877022190</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,19 +236,20 @@
     <MESSAGE value="midifications de la nuit" />
     <MESSAGE value="Différents bugs corrigés ou pas trop ;)" />
     <MESSAGE value="fix dernière ligne fixer (obligée qu'elle soit vide)" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix dernière ligne fixer (obligée qu'elle soit vide)" />
+    <MESSAGE value="Debug des cas de base" />
+    <option name="LAST_COMMIT_MESSAGE" value="Debug des cas de base" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java</url>
-          <line>80</line>
+          <line>75</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/SyntaxicalParser/SynParser.java</url>
-          <line>100</line>
+          <line>98</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
