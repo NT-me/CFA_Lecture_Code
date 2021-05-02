@@ -10,6 +10,7 @@ public class NumberNode extends Node{
 
     public NumberNode() {
         super();
+        this.value = "";
     }
 
     public String getValue() {
@@ -23,6 +24,6 @@ public class NumberNode extends Node{
     @Override
     public void printNode(int depth){
         String indentlvl = " ".repeat(depth);
-        System.out.println(indentlvl + this.type.toString() + " " + this.value);
+        System.out.println(indentlvl + this.type + " " + this.value);
     }
 }

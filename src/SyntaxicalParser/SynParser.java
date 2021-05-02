@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import static Tools.lexicalType.*;
 
+//Si le cas n'est pas possible dans le langage, on renvoie cette erreur
 class SyntaxError extends Exception {
     SyntaxError(String msg) {
         super("An syntax error has been discovered by your favorite pre-compile and scoring tools: " + msg);
@@ -14,14 +15,9 @@ class SyntaxError extends Exception {
 
 public class SynParser {
     public static Node parsing(ArrayList<LexicalToken> token) {
+        //Declaration et instanciation des tokens, nodes et variables
         RootNode AST = new RootNode();
         LexicalToken tokenVerification;
-        /* ContenuToken contenuToken = new ContenuToken();
-        //exemple: int a;
-        SyntaxiqueToken nodeToken = new SyntaxiqueToken(null, "", null);*/
-        //ArrayList<LexicalToken> pileContenuValue = new ArrayList<>();
-        LexicalToken lexicalValue = new LexicalToken();
-        Node nodeToSetup;
         int scope = 0;
         SyntaxicStack pileContenuValue = new SyntaxicStack(0);
         LexicalToken basicToken = new LexicalToken();
@@ -36,10 +32,8 @@ public class SynParser {
 
 
         for (int i = 0; i < token.size(); i++) {
-            // ( ) { }
-            //Ici on empile !
+            //Ici on empile, dans notre SyntaxicStack dans le scope correspondant, qui change si l'on rencontre des parentheses(Lp/Rp) ou accolades(Lb/Rb)
             tokenVerification = token.get(i);
-            //Tant que l'on ne rencontre pas de ";" on ajoute les token dans la pile
             if (tokenVerification.getType().equals(Lp) || tokenVerification.getType().equals(Lb)) {
                 scope = pileContenuValue.newScope();
                 pileContenuValue.pushReadStack(scope, tokenVerification);
@@ -61,10 +55,12 @@ public class SynParser {
                 }
             }
             try {
+                //Si tout va bien une fois l'empilation terminé, on va depiler chaque scope
                 DeclarationFunctionNode nodeFunc = new DeclarationFunctionNode();
                 BodyNode nodeBody = new BodyNode();
+                NumberNode nodeNumber = new NumberNode();
                 for(int currentscope = 0; currentscope <= pileContenuValue.getDeepestScope();currentscope++){
-                    unStack(AST, currentscope, pileContenuValue, nodeFunc, nodeBody);
+                    unStack(AST, currentscope, pileContenuValue, nodeFunc, nodeBody, nodeNumber);
                     pileContenuValue.clearReadStack(currentscope);
                 }
 
@@ -76,19 +72,22 @@ public class SynParser {
 
 
         }
-        //System.out.println(pileContenuValue.getScopMap());
-        //AST.printNode(0);
+        //Si vous voulez avoir un leger aperçu de l'AST avec un petit affichage, vous pouvez decommenter la ligne suivante
+        AST.printNode(0);
         return AST;
     }
 
-    private static RootNode unStack(RootNode AST, int scope, SyntaxicStack pileContenuValue,
-                                    DeclarationFunctionNode nodeFunc, BodyNode nodeBody) throws SyntaxError {
-        boolean parameters = false;
-        boolean variable = false;
-        boolean body = false;
+    //Voici la fonction qui va permettre la depilation, qui prend l'AST, le scope actuel, la syntaxicStack et differents noeuds tampons
+    private static RootNode unStack(RootNode AST, int scope, SyntaxicStack pileContenuValue, DeclarationFunctionNode nodeFunc,
+                                    BodyNode nodeBody, NumberNode nodeNumber) throws SyntaxError {
+
+        //Ici nous créons des booleans pour savoir dans quel statut nous sommes pour que les elements suivants savent où ils sont
+        boolean isParameters = false;
+        boolean isVariable = false;
+        boolean isBody = false;
         boolean isReturn = false;
-        boolean addition = false;
-        boolean affectation = false;
+        boolean isAddition = false;
+        boolean isAffectation = false;
 
         AffectationNode affecNode = new AffectationNode();
         OperationNode opeNode = new OperationNode();
@@ -98,25 +97,27 @@ public class SynParser {
 
 
         for (int j = 0; j < currentScope; j++) {
-        //while(pileContenuValue.readStackSize(scope) > 0){
+            //On recupere le premier LexicalToken de la pile, et on regarde son type dans ce grand switch/case
+            //On recupere la grande majorité du temps le precedent token, car beaucoup sont liés
             LexicalToken currentToken = pileContenuValue.popReadStack(scope, j);
-            //System.out.println(currentToken.getType() + " " + scope);
-            //Ici on dépile !
             switch (currentToken.getType()) {
+                //On sauvegarde ce type pour la prochaine declaration de fonction/variable
                 case BasicType:
                     pileContenuValue.getFlag("basicToken").setToken(currentToken);
                     pileContenuValue.getFlag("previousToken").setToken(currentToken);
                     break;
+                    //N'importe quel mot, souvent une variable pour nous qui sera:
                 case Word:
+                    //Ici declaree
                     if (BasicType.equals(pileContenuValue.getFlag("basicToken").getType())) {
                         DeclarationVariableNode nodeDec = new DeclarationVariableNode();
                         nodeDec.setName(currentToken.getValue());
                         nodeDec.setType(pileContenuValue.getFlag("basicToken").getValue());
 
-                        if(parameters){
-                            variable = true;
+                        if(isParameters){
+                            isVariable = true;
                             nodeFunc.addParams(nodeDec);
-                        }else if(body){
+                        }else if(isBody){
                             nodeBody.addChild(nodeDec);
                         }else{
                             AST.addChild(nodeDec);
@@ -124,13 +125,15 @@ public class SynParser {
                         pileContenuValue.clearFlag("basicToken");
                         pileContenuValue.newVarDeclToken(scope, nodeDec);
                     }
+                    //Ici on verifie le type de retour de la fonction
                     if (isReturn){
                         if(!pileContenuValue.checkTypeVar(nodeFunc.getType(),currentToken.getValue())){
                             throw new SyntaxError(currentToken.getValue());
                         }
                         isReturn = false;
                     }
-                    if (addition){
+                //Ici on cree/agremente une addition
+                    if (isAddition){
                         if(Number.equals(pileContenuValue.getFlag("previousToken").getType()) ||
                                 Word.equals(pileContenuValue.getFlag("previousToken").getType())){
                             //VarNode number = new VarNode(currentToken.getValue());
@@ -141,14 +144,15 @@ public class SynParser {
                     }
                     pileContenuValue.getFlag("previousToken").setToken(currentToken);
                     break;
+                //On declare une fonction, donc on initialise nos flags
                 case Function:
                     pileContenuValue.getFlag("functionToken").setToken(currentToken);
                     pileContenuValue.getFlag("previousToken").setToken(currentToken);
                     break;
+                //Parenthese ouvrante, constitue une declaration de fonction avec potentiellement parametres
                 case Lp:
-                    //si le token actuel est une parenthèse et que celui qui précède est une fonction
                     if(Function.equals(pileContenuValue.getFlag("functionToken").getType())){
-                        parameters = true;
+                        isParameters = true;
                         nodeFunc.setName(pileContenuValue.getFlag("functionToken").getValue());
                         nodeFunc.setType(pileContenuValue.getFlag("basicToken").getValue());
                         nodeFunc.setScope(scope-1);
@@ -156,10 +160,11 @@ public class SynParser {
                     }
 
                     break;
+                //Une virgule dans les parametres precise que plusieurs variables sont instanciees
                 case Coma:
-                    if(parameters){
-                        if(variable){
-                            variable = false;
+                    if(isParameters){
+                        if(isVariable){
+                            isVariable = false;
                             pileContenuValue.getFlag("previousToken").setToken(currentToken);
                             break;
                         }
@@ -169,29 +174,32 @@ public class SynParser {
                     }
                     pileContenuValue.getFlag("previousToken").setToken(currentToken);
                     break;
+                //Parenthese fermante, precise que les parametres de la fonctions sont fini et que nous allons passer a la suite: le body
                 case Rp:
-                    if(parameters){
-                        parameters = false;
+                    if(isParameters){
+                        isParameters = false;
                         pileContenuValue.addFlags("previousToken",currentToken);
 
                     }
                     pileContenuValue.getFlag("previousToken").setToken(currentToken);
                     break;
+                //Accolade ouvrante ouvre la voie au body de la fonction
                 case Lb:
                     if(Rp.equals(pileContenuValue.getFlag("previousToken").getType())){
-                        body = true;
+                        isBody = true;
                     }
                     else{
                         throw new SyntaxError(currentToken.getValue());
                     }
                     pileContenuValue.getFlag("previousToken").setToken(currentToken);
                     break;
+                //Accolade fermante termine le remplissage du body et fin de la declaration de fonction, qui est donc mis dans l'AST
                 case Rb:
-                    if(body){
+                    if(isBody){
                         nodeFunc.setBody(nodeBody);
                         AST.addChild(nodeFunc);
                         pileContenuValue.newFunDeclToken(nodeFunc.getScope(), nodeFunc);
-                        body = false;
+                        isBody = false;
                         pileContenuValue.clearFlag("functionToken");
                     }
                     else{
@@ -199,18 +207,20 @@ public class SynParser {
                     }
                     pileContenuValue.getFlag("previousToken").setToken(currentToken);
                     break;
+                //Les operateurs, ici = pour l'affectation de variable et + pour les operations de variables et nombres
                 case Ope:
                     switch (currentToken.getValue()){
                         case "=":
                             if(Word.equals(pileContenuValue.getFlag("previousToken").getType())){
                                 affecNode.setName(pileContenuValue.getFlag("previousToken").getValue());
-                                affectation = true;
+                                isAffectation = true;
                                 break;
                             }
                             pileContenuValue.getFlag("previousToken").setToken(currentToken);
                             break;
                         case "+":
-                            addition = true;
+                            isAddition = true;
+                            //Si nous avons un nombre ou une variable, la node en question sera utilise/instancie
                             switch (pileContenuValue.getFlag("previousToken").getType()){
                                 case Word:
                                     ArrayList<DeclarationVariableNode> varDeclNodeWithThisName =
@@ -230,76 +240,66 @@ public class SynParser {
                                     break;
 
                                 case Number:
-                                    NumberNode number = new NumberNode(pileContenuValue.getFlag("previousToken").getValue());
                                     opeNode.setType("+");
-                                    opeNode.addChild(number);
+                                    opeNode.addChild(nodeNumber);
+                                    nodeNumber = new NumberNode();
                                     break;
 
                                 default:
                                     throw new SyntaxError(currentToken.getValue());
 
                             }
-
-
-
-/*                            if(Word.equals(pileContenuValue.getFlag("previousToken").getType()) ||
-                                    Number.equals(pileContenuValue.getFlag("previousToken").getType())) {
-                                addition = true;
-                                NumberNode number = new NumberNode(pileContenuValue.getFlag("previousToken").getValue());
-                                opeNode.setType("+");
-                                opeNode.addChild(number);
-                                break;
-                            }else{
-                                throw new SyntaxError(currentToken.getValue());
-                            }*/
                     }
                     break;
+                //le ; precise la fin d'une instruction, et va reinitialise les booleans  et ajouter les nodes correspondantes au bons endroits suivant le statut present
                 case EoI:
-                    if(addition){
-                        if(affectation){
-                            affectation = false;
-                            affecNode.addChild(opeNode);
-                            if(body){
-                                nodeBody.addChild(affecNode);
-                            }else{
-                                AST.addChild(affecNode);
-                            }
-                            addition = false;
-                            pileContenuValue.getFlag("previousToken").setToken(currentToken);
-                            break;
+                    if(isAddition && isAffectation){
+                        affecNode.addChild(opeNode);
+                        if(isBody){
+                            nodeBody.addChild(affecNode);
+                        }else{
+                            AST.addChild(affecNode);
                         }
-                        else if(body){
+                    }
+                    if(isAddition && !isAffectation){
+                        if(isBody){
+                            if(nodeNumber.getValue() != ""){
+                                opeNode.addChild(nodeNumber);
+                            }
                             nodeBody.addChild(opeNode);
                         }else{
                             AST.addChild(opeNode);
                         }
-                        addition = false;
-                        pileContenuValue.getFlag("previousToken").setToken(currentToken);
-                        break;
                     }
-
-
-                    pileContenuValue.getFlag("previousToken").setToken(currentToken);
-                    break;
-                case Number:
-                    if (affectation){
-                        NumberNode number = new NumberNode();
-                        number.setValue(currentToken.getValue());
-                        affecNode.addChild(number);
-
-                        if(scope == 0){
+                    if (!isAddition && isAffectation){
+                        if(isBody){
+                            affecNode.addChild(nodeNumber);
+                            nodeBody.addChild(affecNode);
+                        }else{
                             AST.addChild(affecNode);
                         }
-                        else{
-                            nodeBody.addChild(affecNode);
-                        }
+                    }
+
+                    isAddition = false;
+                    isAffectation = false;
+                    affecNode = new AffectationNode();
+                    opeNode = new OperationNode();
+                    nodeNumber = new NumberNode();
+                    pileContenuValue.getFlag("previousToken").setToken(currentToken);
+                    break;
+                //Un nombre est utilise pour les affectations et operations
+                case Number:
+                    nodeNumber.setValue(currentToken.getValue());
+                    if (isAffectation && isAddition){
+                            opeNode.addChild(nodeNumber);
                     }
                     pileContenuValue.getFlag("previousToken").setToken(currentToken);
                     break;
+                //Pour nous, le seul Keyword est return, et on va initialiser ce qu'il faut pour voir si le prochain token a le bon type
                 case Keyword:
                     switch (currentToken.getValue()){
                         case "return":
-                            if(!body){
+                            if(!isBody){
                                 throw new SyntaxError(currentToken.getValue());
                             }
                             isReturn = true;

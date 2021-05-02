@@ -14,10 +14,6 @@ public class SyntaxicStack {
         return scopMap;
     }
 
-    /*public void setScopMap(HashMap scopMap) {
-        this.scopMap = scopMap;
-    }*/
-
     public int getDeepestScope() {
         return deepestScope;
     }
@@ -56,12 +52,15 @@ public class SyntaxicStack {
 
         HashMap<String, ArrayList>  currentLists = new HashMap<String, ArrayList> ();
 
+        //liste des variables déclarées dans le scope
         ArrayList<DeclarationVariableNode> varDeclList = new ArrayList<DeclarationVariableNode>();
         currentLists.put("declaredVar", varDeclList);
 
+        //liste des fonctions déclarées dans le scope
         ArrayList<DeclarationFunctionNode> funDeclList = new ArrayList<DeclarationFunctionNode>();
         currentLists.put("declaredFun", funDeclList);
 
+        //pile du scope
         ArrayList<String> readList = new ArrayList<String>();
         currentLists.put("readStack", readList);
 
@@ -92,6 +91,7 @@ public class SyntaxicStack {
         return scope;
     }
 
+    //Verification si la fonction a bien ete declaree
     public boolean checkIfFunIsDecl(DeclarationFunctionNode foo){
         ArrayList<DeclarationFunctionNode> allFunDecl = new ArrayList<>();
         for(int i = 0; i<=this.deepestScope; i++){
@@ -101,6 +101,7 @@ public class SyntaxicStack {
         return allFunDecl.contains(foo);
     }
 
+    //Verification si la variable a bien ete declaree
     public boolean checkIfVarIsDecl(DeclarationVariableNode var){
         ArrayList<DeclarationVariableNode> allVarDecl = new ArrayList<>();
         for(int i = 0; i<=this.deepestScope; i++){
@@ -123,6 +124,7 @@ public class SyntaxicStack {
         return res;
     }
 
+    //Verifie le type d'une variable grace a son nom
     public boolean checkTypeVar(String type, String name){
         ArrayList<DeclarationVariableNode> allVarDecl = new ArrayList<>();
         for(int i = 0; i<=this.deepestScope; i++){
@@ -141,6 +143,7 @@ public class SyntaxicStack {
         return ((ArrayList<LexicalToken>)this.scopMap.get(scope).get("readStack")).get(i);
     }
 
+    //creation d'un nouveau scope et des listes associees
     public int newScope(){
         int newScope = (this.deepestScope + 1);
         HashMap<String, ArrayList<String>>  currentLists = new HashMap<String, ArrayList<String>> ();
